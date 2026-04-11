@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.quanlyhocsinhmoblie"
+    namespace = "com.example.quanlyhocsinhmobile"
     compileSdk = 35
 
     defaultConfig {

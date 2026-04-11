@@ -1,4 +1,4 @@
-package com.example.quanlyhocsinhmoblie.ui.tien;
+package com.example.quanlyhocsinhmobile.ui.tien;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,8 +8,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.quanlyhocsinhmoblie.R;
-import com.example.quanlyhocsinhmoblie.data.Model.Diem;
+import com.example.quanlyhocsinhmobile.R;
+import com.example.quanlyhocsinhmobile.data.Model.Diem;
 
 import java.util.List;
 import java.util.Locale;

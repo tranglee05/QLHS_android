@@ -1,4 +1,4 @@
-package com.example.quanlyhocsinhmoblie.data.DAO;
+package com.example.quanlyhocsinhmobile.data.DAO;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -7,7 +7,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.quanlyhocsinhmoblie.data.Model.Diem;
+import com.example.quanlyhocsinhmobile.data.Model.Diem;
 
 import java.util.List;
 
@@ -32,7 +32,7 @@ public interface DiemDAO {
     @Delete
     void delete(Diem diem);
 
-    @Query("SELECT * FROM Diem WHERE maHS LIKE :search OR maMH LIKE :search OR tenHS LIKE :search")
+    @Query("SELECT * FROM Diem WHERE maHS LIKE :search OR maMH LIKE :search")
     List<Diem> searchDiem(String search);
 
     @Query("SELECT * FROM Diem WHERE (:maMH IS NULL OR maMH = :maMH) AND (:hocKy = 0 OR hocKy = :hocKy)")

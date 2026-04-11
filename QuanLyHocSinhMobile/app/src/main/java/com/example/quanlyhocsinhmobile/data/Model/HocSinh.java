@@ -1,10 +1,17 @@
-package com.example.quanlyhocsinhmoblie.data.Model;
+package com.example.quanlyhocsinhmobile.data.Model;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "hocsinh")
+@Entity(tableName = "HocSinh",
+        foreignKeys = {
+                @ForeignKey(entity = Lop.class, parentColumns = "maLop", childColumns = "maLop", onDelete = ForeignKey.CASCADE, onUpdate = ForeignKey.CASCADE),
+                @ForeignKey(entity = DoiTuongUuTien.class, parentColumns = "maDT", childColumns = "maDT", onDelete = ForeignKey.SET_NULL, onUpdate = ForeignKey.CASCADE)
+        },
+        indices = {@Index("maLop"), @Index("maDT")})
 public class HocSinh {
     @PrimaryKey
     @NonNull

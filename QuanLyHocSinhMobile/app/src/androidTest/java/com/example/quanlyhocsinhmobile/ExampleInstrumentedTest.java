@@ -1,4 +1,4 @@
-package com.example.quanlyhocsinhmoblie;
+package com.example.quanlyhocsinhmobile;
 
 import android.content.Context;
 

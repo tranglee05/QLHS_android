@@ -1,13 +1,11 @@
-package com.example.quanlyhocsinhmoblie.MainForm;
+package com.example.quanlyhocsinhmobile.MainForm;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.quanlyhocsinhmoblie.R;
+import com.example.quanlyhocsinhmobile.R;
 
 public class MainForm extends AppCompatActivity {
 
@@ -32,7 +30,7 @@ public class MainForm extends AppCompatActivity {
 
         // Group 3
         findViewById(R.id.btn_grades).setOnClickListener(v -> {
-            android.content.Intent intent = new android.content.Intent(MainForm.this, com.example.quanlyhocsinhmoblie.ui.tien.DiemUI.class);
+            android.content.Intent intent = new android.content.Intent(MainForm.this, com.example.quanlyhocsinhmobile.ui.tien.DiemUI.class);
             startActivity(intent);
         });
         findViewById(R.id.btn_conduct).setOnClickListener(v -> showToast("Quản lý hạnh kiểm"));

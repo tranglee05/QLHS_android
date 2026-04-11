@@ -1,4 +1,4 @@
-package com.example.quanlyhocsinhmoblie;
+package com.example.quanlyhocsinhmobile;
 
 import org.junit.Test;
 

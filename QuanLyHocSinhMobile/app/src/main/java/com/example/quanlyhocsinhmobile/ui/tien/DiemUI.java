@@ -1,4 +1,4 @@
-package com.example.quanlyhocsinhmoblie.ui.tien;
+package com.example.quanlyhocsinhmobile.ui.tien;
 
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -12,14 +12,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.quanlyhocsinhmoblie.R;
-import com.example.quanlyhocsinhmoblie.data.Connection.AppDatabase;
-import com.example.quanlyhocsinhmoblie.data.DAO.DiemDAO;
-import com.example.quanlyhocsinhmoblie.data.DAO.HocSinhDAO;
-import com.example.quanlyhocsinhmoblie.data.DAO.MonHocDAO;
-import com.example.quanlyhocsinhmoblie.data.Model.Diem;
-import com.example.quanlyhocsinhmoblie.data.Model.HocSinh;
-import com.example.quanlyhocsinhmoblie.data.Model.MonHoc;
+import com.example.quanlyhocsinhmobile.R;
+import com.example.quanlyhocsinhmobile.data.Connection.AppDatabase;
+import com.example.quanlyhocsinhmobile.data.DAO.DiemDAO;
+import com.example.quanlyhocsinhmobile.data.DAO.HocSinhDAO;
+import com.example.quanlyhocsinhmobile.data.DAO.MonHocDAO;
+import com.example.quanlyhocsinhmobile.data.Model.Diem;
 
 import java.util.ArrayList;
 import java.util.List;

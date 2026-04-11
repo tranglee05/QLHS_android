@@ -1,11 +1,11 @@
-package com.example.quanlyhocsinhmoblie.data.DAO;
+package com.example.quanlyhocsinhmobile.data.DAO;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.example.quanlyhocsinhmoblie.data.Model.HocSinh;
+import com.example.quanlyhocsinhmobile.data.Model.HocSinh;
 
 import java.util.List;
 
