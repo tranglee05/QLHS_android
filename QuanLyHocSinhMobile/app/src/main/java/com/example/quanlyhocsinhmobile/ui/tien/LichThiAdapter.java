@@ -36,7 +36,7 @@ public class LichThiAdapter extends RecyclerView.Adapter<LichThiAdapter.LichThiV
     @NonNull
     @Override
     public LichThiViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_lichthi, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_tien_lichthi, parent, false);
         return new LichThiViewHolder(view);
     }
 

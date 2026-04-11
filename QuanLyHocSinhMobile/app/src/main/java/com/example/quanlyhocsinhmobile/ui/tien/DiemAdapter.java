@@ -37,7 +37,7 @@ public class DiemAdapter extends RecyclerView.Adapter<DiemAdapter.DiemViewHolder
     @NonNull
     @Override
     public DiemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_diem, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_tien_diem, parent, false);
         return new DiemViewHolder(view);
     }
 
