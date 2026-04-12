@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -16,24 +15,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlyhocsinhmobile.R;
-import com.example.quanlyhocsinhmobile.data.Connection.AppDatabase;
-import com.example.quanlyhocsinhmobile.data.DAO.LichThiDAO;
-import com.example.quanlyhocsinhmobile.data.DAO.MonHocDAO;
-import com.example.quanlyhocsinhmobile.data.DAO.PhongHocDAO;
+import com.example.quanlyhocsinhmobile.Controller_View.LichThiController;
 import com.example.quanlyhocsinhmobile.data.Model.LichThi;
 import com.example.quanlyhocsinhmobile.data.Model.LichThiDisplay;
 import com.example.quanlyhocsinhmobile.data.Model.MonHoc;
 import com.example.quanlyhocsinhmobile.data.Model.PhongHoc;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -50,9 +38,7 @@ public class LichThiUI extends AppCompatActivity {
     private View layoutCircularMenu;
     private boolean isMenuOpen = false;
 
-    private LichThiDAO lichThiDAO;
-    private MonHocDAO monHocDAO;
-    private PhongHocDAO phongHocDAO;
+    private LichThiController controller;
     private LichThiAdapter adapter;
     private List<LichThiDisplay> currentList = new ArrayList<>();
     private LichThi selectedLichThi;
@@ -66,18 +52,16 @@ public class LichThiUI extends AppCompatActivity {
         setContentView(R.layout.activity_tien_lichthi);
 
         initViews();
-        initDatabase();
+        initController();
         setupRecyclerView();
         loadSpinners();
         loadData();
         setupMenuActions();
 
-        //ivBack.setOnClickListener(v -> finish());
-
         btnSearch.setOnClickListener(v -> {
             String query = etSearch.getText().toString();
             if (!query.isEmpty()) {
-                currentList = lichThiDAO.searchLichThi("%" + query + "%");
+                currentList = controller.searchLichThi(query);
                 adapter.setLichThiList(currentList);
             } else {
                 loadData();
@@ -165,52 +149,7 @@ public class LichThiUI extends AppCompatActivity {
     }
 
     private void exportToExcel() {
-        if (currentList.isEmpty()) {
-            Toast.makeText(this, "Danh sách trống, không thể xuất!", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        Workbook workbook = new XSSFWorkbook();
-        Sheet sheet = workbook.createSheet("LichThi");
-
-        // Header
-        Row headerRow = sheet.createRow(0);
-        headerRow.createCell(0).setCellValue("Mã LT");
-        headerRow.createCell(1).setCellValue("Tên Kỳ Thi");
-        headerRow.createCell(2).setCellValue("Môn Học");
-        headerRow.createCell(3).setCellValue("Phòng");
-        headerRow.createCell(4).setCellValue("Ngày Thi");
-        headerRow.createCell(5).setCellValue("Giờ Bắt Đầu");
-        headerRow.createCell(6).setCellValue("Giờ Kết Thúc");
-
-        // Data
-        for (int i = 0; i < currentList.size(); i++) {
-            LichThiDisplay display = currentList.get(i);
-            LichThi lt = display.getLichThi();
-            Row row = sheet.createRow(i + 1);
-            row.createCell(0).setCellValue(lt.getMaLT());
-            row.createCell(1).setCellValue(lt.getTenKyThi());
-            row.createCell(2).setCellValue(display.getTenMH() != null ? display.getTenMH() : lt.getMaMH());
-            row.createCell(3).setCellValue(display.getTenPhong() != null ? display.getTenPhong() : lt.getMaPhong());
-            row.createCell(4).setCellValue(lt.getNgayThi());
-            row.createCell(5).setCellValue(lt.getGioBatDau());
-            row.createCell(6).setCellValue(lt.getGioKetThuc());
-        }
-
-        try {
-            File cachePath = new File(getExternalFilesDir(null), "exports");
-            if (!cachePath.exists()) cachePath.mkdirs();
-            File file = new File(cachePath, "LichThi_" + System.currentTimeMillis() + ".xlsx");
-            FileOutputStream fileOut = new FileOutputStream(file);
-            workbook.write(fileOut);
-            fileOut.close();
-            workbook.close();
-
-            Toast.makeText(this, "Đã lưu tại: " + file.getAbsolutePath(), Toast.LENGTH_LONG).show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "Lỗi khi xuất Excel: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
+        controller.exportToExcel(currentList);
     }
 
     private void toggleMenu() {
@@ -224,11 +163,8 @@ public class LichThiUI extends AppCompatActivity {
         }
     }
 
-    private void initDatabase() {
-        AppDatabase db = AppDatabase.getDatabase(this);
-        lichThiDAO = db.lichThiDAO();
-        monHocDAO = db.monHocDAO();
-        phongHocDAO = db.phongHocDAO();
+    private void initController() {
+        controller = new LichThiController(this);
     }
 
     private void setupRecyclerView() {
@@ -240,19 +176,19 @@ public class LichThiUI extends AppCompatActivity {
     }
 
     private void loadSpinners() {
-        listMonHoc = monHocDAO.getAll();
+        listMonHoc = controller.getAllMonHoc();
         List<String> monHocNames = new ArrayList<>();
         for (MonHoc mh : listMonHoc) monHocNames.add(mh.getTenMH());
         spinnerMon.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, monHocNames));
 
-        listPhongHoc = phongHocDAO.getAll();
+        listPhongHoc = controller.getAllPhongHoc();
         List<String> phongHocNames = new ArrayList<>();
         for (PhongHoc ph : listPhongHoc) phongHocNames.add(ph.getTenPhong());
         spinnerPhong.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, phongHocNames));
     }
 
     private void loadData() {
-        currentList = lichThiDAO.getAll();
+        currentList = controller.getAllLichThi();
         adapter.setLichThiList(currentList);
     }
 
@@ -279,57 +215,33 @@ public class LichThiUI extends AppCompatActivity {
     }
 
     private void addNewLichThi() {
-        String tenKyThi = etTenKyThi.getText().toString();
-        if (tenKyThi.isEmpty()) {
-            Toast.makeText(this, "Vui lòng nhập tên kỳ thi để thêm mới", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        
-        LichThi newLich = new LichThi();
-        newLich.setTenKyThi(tenKyThi);
-        newLich.setNgayThi(etNgayThi.getText().toString());
-        newLich.setGioBatDau(etGioBD.getText().toString());
-        newLich.setGioKetThuc(etGioKT.getText().toString());
-        
-        if (spinnerMon.getSelectedItemPosition() >= 0 && !listMonHoc.isEmpty()) {
-            MonHoc selectedMon = listMonHoc.get(spinnerMon.getSelectedItemPosition());
-            newLich.setMaMH(selectedMon.getMaMH());
-        }
-        if (spinnerPhong.getSelectedItemPosition() >= 0 && !listPhongHoc.isEmpty()) {
-            PhongHoc selectedPhong = listPhongHoc.get(spinnerPhong.getSelectedItemPosition());
-            newLich.setMaPhong(selectedPhong.getMaPhong());
-        }
-
-        lichThiDAO.insert(newLich);
+        controller.insertLichThi(
+                etTenKyThi.getText().toString(),
+                etNgayThi.getText().toString(),
+                etGioBD.getText().toString(),
+                etGioKT.getText().toString(),
+                spinnerMon.getSelectedItemPosition(),
+                listMonHoc,
+                spinnerPhong.getSelectedItemPosition(),
+                listPhongHoc
+        );
         loadData();
         refreshForm();
-        Toast.makeText(this, "Thêm lịch thi mới thành công", Toast.LENGTH_SHORT).show();
     }
 
     private void updateLichThi() {
-        if (selectedLichThi == null) {
-            Toast.makeText(this, "Vui lòng chọn lịch thi từ danh sách để sửa", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        selectedLichThi.setTenKyThi(etTenKyThi.getText().toString());
-        selectedLichThi.setNgayThi(etNgayThi.getText().toString());
-        selectedLichThi.setGioBatDau(etGioBD.getText().toString());
-        selectedLichThi.setGioKetThuc(etGioKT.getText().toString());
-
-        if (spinnerMon.getSelectedItemPosition() >= 0 && !listMonHoc.isEmpty()) {
-            MonHoc selectedMon = listMonHoc.get(spinnerMon.getSelectedItemPosition());
-            selectedLichThi.setMaMH(selectedMon.getMaMH());
-        }
-
-        if (spinnerPhong.getSelectedItemPosition() >= 0 && !listPhongHoc.isEmpty()) {
-            PhongHoc selectedPhong = listPhongHoc.get(spinnerPhong.getSelectedItemPosition());
-            selectedLichThi.setMaPhong(selectedPhong.getMaPhong());
-        }
-
-        lichThiDAO.update(selectedLichThi);
+        controller.updateLichThi(
+                selectedLichThi,
+                etTenKyThi.getText().toString(),
+                etNgayThi.getText().toString(),
+                etGioBD.getText().toString(),
+                etGioKT.getText().toString(),
+                spinnerMon.getSelectedItemPosition(),
+                listMonHoc,
+                spinnerPhong.getSelectedItemPosition(),
+                listPhongHoc
+        );
         loadData();
-        Toast.makeText(this, "Cập nhật lịch thi thành công", Toast.LENGTH_SHORT).show();
     }
 
     private void deleteLichThi() {
@@ -338,7 +250,7 @@ public class LichThiUI extends AppCompatActivity {
             return;
         }
 
-        lichThiDAO.delete(selectedLichThi);
+        controller.deleteLichThi(selectedLichThi);
         refreshForm();
         loadData();
         Toast.makeText(this, "Đã xóa lịch thi", Toast.LENGTH_SHORT).show();

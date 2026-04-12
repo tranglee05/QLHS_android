@@ -18,7 +18,7 @@ import java.util.concurrent.Executors;
     TaiKhoan.class, GiaoVien.class, Lop.class, HocSinh.class,
     ThoiKhoaBieu.class, Diem.class, HanhKiem.class, LichThi.class,
     HocPhi.class, ThongBao.class, PhucKhao.class
-}, version = 15, exportSchema = false)
+}, version = 16, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     // --- 1. Khai báo các DAO ---
@@ -27,6 +27,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract MonHocDAO monHocDAO();
     public abstract LichThiDAO lichThiDAO();
     public abstract PhongHocDAO phongHocDAO();
+    public abstract LopDAO lopDAO();
 
     // --- 2. Cấu hình Singleton & Executor (cái này để tối ưu database giúp chạy mượt mà
     private static volatile AppDatabase INSTANCE;

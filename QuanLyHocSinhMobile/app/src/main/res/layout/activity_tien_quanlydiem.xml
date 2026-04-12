@@ -57,64 +57,73 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="bottom">
+                        android:orientation="vertical">
 
-                        <LinearLayout
-                            android:layout_width="0dp"
+                        <GridLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical"
-                            android:layout_marginEnd="4dp">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Lớp học"
-                                android:textSize="12sp"
-                                android:textColor="#666666"
-                                android:paddingStart="4dp"/>
-                            <Spinner android:id="@+id/spinner_class" android:layout_width="match_parent" android:layout_height="48dp" />
-                        </LinearLayout>
+                            android:columnCount="2"
+                            android:alignmentMode="alignMargins">
 
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1.2"
-                            android:orientation="vertical"
-                            android:layout_marginEnd="4dp">
-                            <TextView
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text="Môn học"
-                                android:textSize="12sp"
-                                android:textColor="#666666"
-                                android:paddingStart="4dp"/>
-                            <Spinner android:id="@+id/spinner_subject" android:layout_width="match_parent" android:layout_height="48dp" />
-                        </LinearLayout>
+                                android:layout_columnWeight="1"
+                                android:orientation="vertical"
+                                android:layout_margin="4dp">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Lớp học"
+                                    android:textSize="12sp"
+                                    android:textColor="#666666"
+                                    android:paddingStart="4dp"/>
+                                <Spinner android:id="@+id/spinner_class" android:layout_width="match_parent" android:layout_height="48dp" android:background="@android:drawable/btn_dropdown"/>
+                            </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.8"
-                            android:orientation="vertical"
-                            android:layout_marginEnd="8dp">
-                            <TextView
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text="Học kỳ"
-                                android:textSize="12sp"
-                                android:textColor="#666666"
-                                android:paddingStart="4dp"/>
-                            <Spinner android:id="@+id/spinner_semester" android:layout_width="match_parent" android:layout_height="48dp" />
-                        </LinearLayout>
+                                android:layout_columnWeight="1"
+                                android:orientation="vertical"
+                                android:layout_margin="4dp">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Môn học"
+                                    android:textSize="12sp"
+                                    android:textColor="#666666"
+                                    android:paddingStart="4dp"/>
+                                <Spinner android:id="@+id/spinner_subject" android:layout_width="match_parent" android:layout_height="48dp" android:background="@android:drawable/btn_dropdown"/>
+                            </LinearLayout>
 
-                        <Button android:id="@+id/btn_filter"
-                            android:layout_width="wrap_content"
-                            android:layout_height="54dp"
-                            android:text="LỌC"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:backgroundTint="@color/color_secondary_teal" />
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_columnWeight="1"
+                                android:orientation="vertical"
+                                android:layout_margin="4dp">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Học kỳ"
+                                    android:textSize="12sp"
+                                    android:textColor="#666666"
+                                    android:paddingStart="4dp"/>
+                                <Spinner android:id="@+id/spinner_semester" android:layout_width="match_parent" android:layout_height="48dp" android:background="@android:drawable/btn_dropdown"/>
+                            </LinearLayout>
+
+                            <Button android:id="@+id/btn_filter"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_columnWeight="1"
+                                android:layout_gravity="bottom"
+                                android:layout_margin="4dp"
+                                android:text="LỌC"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:backgroundTint="@color/color_secondary_teal" />
+                        </GridLayout>
                     </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

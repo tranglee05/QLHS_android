@@ -55,6 +55,8 @@ public interface DiemDAO {
            "LEFT JOIN HocSinh ON Diem.maHS = HocSinh.MaHS " +
            "LEFT JOIN MonHoc ON Diem.maMH = MonHoc.MaMH " +
            "LEFT JOIN Lop ON HocSinh.MaLop = Lop.MaLop " +
-           "WHERE (:maMH IS NULL OR Diem.maMH = :maMH) AND (:hocKy = 0 OR Diem.hocKy = :hocKy)")
-    List<DiemDisplay> filterDiem(String maMH, int hocKy);
+           "WHERE (:maMH IS NULL OR Diem.maMH = :maMH) " +
+           "AND (:hocKy = 0 OR Diem.hocKy = :hocKy) " +
+           "AND (:maLop IS NULL OR Lop.MaLop = :maLop)")
+    List<DiemDisplay> filterDiem(String maMH, int hocKy, String maLop);
 }
