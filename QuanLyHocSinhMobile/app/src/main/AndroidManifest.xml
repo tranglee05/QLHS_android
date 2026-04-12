@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QuanLyHocSinhMoblie">
         <activity
-            android:name=".MainForm.MainForm"
+            android:name=".ui.zMainForm.MainForm"
             android:exported="true"
             android:theme="@style/Theme.QuanLyHocSinhMoblie">
             <intent-filter>
@@ -24,19 +24,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.tien.DiemUI"
+            android:name=".ui.tien.DiemActivity"
             android:exported="true"
             android:label="Quản lý điểm số"
             android:theme="@style/Theme.QuanLyHocSinhMoblie">
         </activity>
         <activity
-            android:name=".ui.tien.LichThiUI"
+            android:name=".ui.tien.LichThiActivity"
             android:exported="true"
             android:label="Quản lý lịch thi"
             android:theme="@style/Theme.QuanLyHocSinhMoblie">
         </activity>
         <activity
-            android:name=".ui.tien.HanhKiemUI"
+            android:name=".ui.tien.HanhKiemActivity"
             android:exported="true"
             android:label="Quản lý hạnh kiểm"
             android:theme="@style/Theme.QuanLyHocSinhMoblie">

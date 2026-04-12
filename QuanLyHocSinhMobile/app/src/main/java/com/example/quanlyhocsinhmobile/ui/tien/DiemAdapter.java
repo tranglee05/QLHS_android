@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlyhocsinhmobile.R;
-import com.example.quanlyhocsinhmobile.data.Model.Diem;
+import com.example.quanlyhocsinhmobile.data.local.Model.Diem;
 
 import java.util.List;
 import java.util.Locale;
@@ -33,10 +33,14 @@ public class DiemAdapter extends RecyclerView.Adapter<DiemAdapter.DiemViewHolder
         notifyDataSetChanged();
     }
 
+    public List<Diem.Display> getDiemList() {
+        return diemList;
+    }
+
     @NonNull
     @Override
     public DiemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_tien_diem, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.tien_item_diem, parent, false);
         return new DiemViewHolder(view);
     }
 

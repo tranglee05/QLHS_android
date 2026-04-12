@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlyhocsinhmobile.R;
-import com.example.quanlyhocsinhmobile.data.Model.LichThi;
+import com.example.quanlyhocsinhmobile.data.local.Model.LichThi;
 
 import java.util.List;
 
@@ -32,10 +32,14 @@ public class LichThiAdapter extends RecyclerView.Adapter<LichThiAdapter.LichThiV
         notifyDataSetChanged();
     }
 
+    public List<LichThi.Display> getLichThiList() {
+        return lichThiList;
+    }
+
     @NonNull
     @Override
     public LichThiViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_tien_lichthi, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.tien_item_lichthi, parent, false);
         return new LichThiViewHolder(view);
     }
 

@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlyhocsinhmobile.R;
-import com.example.quanlyhocsinhmobile.data.Model.HanhKiem;
+import com.example.quanlyhocsinhmobile.data.local.Model.HanhKiem;
 
 import java.util.List;
 
@@ -32,10 +32,14 @@ public class HanhKiemAdapter extends RecyclerView.Adapter<HanhKiemAdapter.HanhKi
         notifyDataSetChanged();
     }
 
+    public List<HanhKiem.Display> getList() {
+        return list;
+    }
+
     @NonNull
     @Override
     public HanhKiemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_tien_hanhkiem, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.tien_item_hanhkiem, parent, false);
         return new HanhKiemViewHolder(view);
     }
 
