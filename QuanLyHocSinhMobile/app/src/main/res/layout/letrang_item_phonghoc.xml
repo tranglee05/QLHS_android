@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="12dp"
+    android:background="@drawable/border_bottom">
+
+    <TextView
+        android:id="@+id/tv_ma_phong"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Mã"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/tv_ten_phong"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Tên phòng"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/tv_suc_chua"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Sức chứa"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/tv_loai_phong"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Loại phòng"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/tv_tinh_trang"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Tình trạng"
+        android:textColor="@color/black"
+        android:textStyle="italic" />
+</LinearLayout>

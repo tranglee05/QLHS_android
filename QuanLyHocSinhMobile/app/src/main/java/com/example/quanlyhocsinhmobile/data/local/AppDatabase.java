@@ -7,29 +7,8 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.example.quanlyhocsinhmobile.data.local.DAO.DiemDAO;
-import com.example.quanlyhocsinhmobile.data.local.DAO.HanhKiemDAO;
-//import com.example.quanlyhocsinhmobile.data.local.DAO.HocPhiDAO;
-import com.example.quanlyhocsinhmobile.data.local.DAO.HocSinhDAO;
-import com.example.quanlyhocsinhmobile.data.local.DAO.LichThiDAO;
-import com.example.quanlyhocsinhmobile.data.local.DAO.LopDAO;
-import com.example.quanlyhocsinhmobile.data.local.DAO.MonHocDAO;
-import com.example.quanlyhocsinhmobile.data.local.DAO.PhongHocDAO;
-import com.example.quanlyhocsinhmobile.data.local.Model.Diem;
-import com.example.quanlyhocsinhmobile.data.local.Model.DoiTuongUuTien;
-import com.example.quanlyhocsinhmobile.data.local.Model.GiaoVien;
-import com.example.quanlyhocsinhmobile.data.local.Model.HanhKiem;
-import com.example.quanlyhocsinhmobile.data.local.Model.HocPhi;
-import com.example.quanlyhocsinhmobile.data.local.Model.HocSinh;
-import com.example.quanlyhocsinhmobile.data.local.Model.LichThi;
-import com.example.quanlyhocsinhmobile.data.local.Model.Lop;
-import com.example.quanlyhocsinhmobile.data.local.Model.MonHoc;
-import com.example.quanlyhocsinhmobile.data.local.Model.PhongHoc;
-import com.example.quanlyhocsinhmobile.data.local.Model.PhucKhao;
-import com.example.quanlyhocsinhmobile.data.local.Model.TaiKhoan;
-import com.example.quanlyhocsinhmobile.data.local.Model.ThoiKhoaBieu;
-import com.example.quanlyhocsinhmobile.data.local.Model.ThongBao;
-import com.example.quanlyhocsinhmobile.data.local.Model.ToHopMon;
+import com.example.quanlyhocsinhmobile.data.local.DAO.*;
+import com.example.quanlyhocsinhmobile.data.local.Model.*;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -50,9 +29,13 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract PhongHocDAO phongHocDAO();
     public abstract LopDAO lopDAO();
     public abstract HanhKiemDAO hanhKiemDAO();
-//    public abstract HocPhiDAO hocPhiDAO();
+    public abstract HocPhiDAO hocPhiDAO();
+    public abstract TKBDAO tkbDAO();
+    public abstract GiaoVienDAO giaoVienDAO();
+    public abstract ThongBaoDAO thongBaoDAO();
+    public abstract PhucKhaoDAO phucKhaoDAO();
 
-    //Cấu hình Singleton & Executor (cái này để tối ưu database giúp chạy mượt mà
+    // Singleton & Executor
     private static volatile AppDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
     public static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
@@ -73,12 +56,10 @@ public abstract class AppDatabase extends RoomDatabase {
         return INSTANCE;
     }
 
-    // --- 3. Callback khởi tạo dữ liệu mẫu ---
     private static final RoomDatabase.Callback sRoomDatabaseCallback = new RoomDatabase.Callback() {
         @Override
         public void onOpen(@NonNull SupportSQLiteDatabase db) {
             super.onOpen(db);
-            // Gọi logic nạp dữ liệu từ file KhoiTaoDatabase riêng biệt
             databaseWriteExecutor.execute(() -> KhoiTaoDatabase.checkAndSeedData(db));
         }
     };
