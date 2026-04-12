@@ -1,5 +1,6 @@
 package com.example.quanlyhocsinhmobile.data.Model;
 
+import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Index;
@@ -49,4 +50,30 @@ public class ThoiKhoaBieu {
 
     public int getTietKetThuc() { return tietKetThuc; }
     public void setTietKetThuc(int tietKetThuc) { this.tietKetThuc = tietKetThuc; }
+
+    public static class Display {
+        @Embedded
+        private ThoiKhoaBieu thoiKhoaBieu;
+        private String tenLop;
+        private String tenMH;
+        private String tenGV;
+        private String tenPhong;
+
+        public Display() {}
+
+        public ThoiKhoaBieu getThoiKhoaBieu() { return thoiKhoaBieu; }
+        public void setThoiKhoaBieu(ThoiKhoaBieu thoiKhoaBieu) { this.thoiKhoaBieu = thoiKhoaBieu; }
+
+        public String getTenLop() { return tenLop; }
+        public void setTenLop(String tenLop) { this.tenLop = tenLop; }
+
+        public String getTenMH() { return tenMH; }
+        public void setTenMH(String tenMH) { this.tenMH = tenMH; }
+
+        public String getTenGV() { return tenGV; }
+        public void setTenGV(String tenGV) { this.tenGV = tenGV; }
+
+        public String getTenPhong() { return tenPhong; }
+        public void setTenPhong(String tenPhong) { this.tenPhong = tenPhong; }
+    }
 }

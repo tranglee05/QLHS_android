@@ -13,7 +13,10 @@ import java.util.List;
 
 @Dao
 public interface PhongHocDAO {
-    @Query("SELECT * FROM PhongHoc")
+    @Query("SELECT maPhong, tenPhong, sucChua, loaiPhong, " +
+           "CASE WHEN EXISTS (SELECT 1 FROM ThoiKhoaBieu WHERE ThoiKhoaBieu.maPhong = PhongHoc.maPhong) " +
+           "THEN 'Đang sử dụng' ELSE 'Trống' END AS tinhTrang " +
+           "FROM PhongHoc")
     List<PhongHoc> getAll();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -24,4 +27,10 @@ public interface PhongHocDAO {
 
     @Delete
     void delete(PhongHoc phongHoc);
+
+    @Query("SELECT COUNT(*) FROM PhongHoc WHERE maPhong = :ma")
+    int checkMaPhong(String ma);
+
+    @Query("SELECT COUNT(*) FROM PhongHoc WHERE tenPhong = :ten")
+    int checkTenPhong(String ten);
 }

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="12dp"
+    android:background="@drawable/border_bottom">
+
+    <TextView
+        android:id="@+id/tv_thu"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Thứ"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/tv_tiet"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Tiết"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/tv_tenLop"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Lớp"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/tv_mon"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Môn học"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/tv_phong"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Phòng"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/tv_giaovien"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Giáo viên"
+        android:textColor="@color/black" />
+</LinearLayout>

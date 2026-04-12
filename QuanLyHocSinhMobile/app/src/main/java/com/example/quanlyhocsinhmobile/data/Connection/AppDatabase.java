@@ -30,6 +30,8 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract LopDAO lopDAO();
     public abstract HanhKiemDAO hanhKiemDAO();
     public abstract HocPhiDAO hocPhiDAO();
+    public abstract TKBDAO tkbDAO();
+    public abstract GiaoVienDAO giaoVienDAO();
 
     //Cấu hình Singleton & Executor (cái này để tối ưu database giúp chạy mượt mà
     private static volatile AppDatabase INSTANCE;
