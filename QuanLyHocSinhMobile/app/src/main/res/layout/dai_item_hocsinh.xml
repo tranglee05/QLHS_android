@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="12dp"
+    android:background="?android:attr/selectableItemBackground">
+
+    <!-- Mã HS -->
+    <TextView
+        android:id="@+id/tv_item_ma_hs"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="HS01"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="12sp" />
+
+    <!-- Họ tên -->
+    <TextView
+        android:id="@+id/tv_item_ten_hs"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:text="Nguyễn Văn A"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="12sp" />
+
+    <!-- Ngày sinh -->
+    <TextView
+        android:id="@+id/tv_item_ns"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="01/01/2000"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="12sp" />
+
+    <!-- Giới tính -->
+    <TextView
+        android:id="@+id/tv_item_gt"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="Nam"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="12sp" />
+
+    <!-- Địa chỉ -->
+    <TextView
+        android:id="@+id/tv_item_dc"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Hà Nội"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="12sp" />
+
+    <!-- Mã lớp -->
+    <TextView
+        android:id="@+id/tv_item_lop"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="CTK42"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="12sp" />
+
+    <!-- Mã đối tượng -->
+    <TextView
+        android:id="@+id/tv_item_dt"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="DT01"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="12sp" />
+
+</LinearLayout>

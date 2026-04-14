@@ -34,6 +34,8 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract GiaoVienDAO giaoVienDAO();
     public abstract ThongBaoDAO thongBaoDAO();
     public abstract PhucKhaoDAO phucKhaoDAO();
+    public abstract DoiTuongDAO doiTuongDAO();
+    public abstract TaiKhoanDAO taiKhoanDAO();
 
     // Singleton & Executor
     private static volatile AppDatabase INSTANCE;

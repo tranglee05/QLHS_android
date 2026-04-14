@@ -59,6 +59,30 @@
             android:label="Quản lý phòng học"
             android:theme="@style/Theme.QuanLyHocSinhMoblie">
         </activity>
+        <activity
+            android:name=".ui.dai.HocSinhActivity"
+            android:exported="true"
+            android:label="Hồ sơ học sinh"
+            android:theme="@style/Theme.QuanLyHocSinhMoblie">
+        </activity>
+        <activity
+            android:name=".ui.dai.DoiTuongActivity"
+            android:exported="true"
+            android:label="Đối tượng và chính sách"
+            android:theme="@style/Theme.QuanLyHocSinhMoblie">
+        </activity>
+        <activity
+            android:name=".ui.dai.TaiKhoanActivity"
+            android:exported="true"
+            android:label="Tài khoản"
+            android:theme="@style/Theme.QuanLyHocSinhMoblie">
+        </activity>
+        <activity
+            android:name=".ui.dai.LoginActivity"
+            android:exported="true"
+            android:label="Đăng nhập"
+            android:theme="@style/Theme.QuanLyHocSinhMoblie">
+        </activity>
 
     </application>
 
