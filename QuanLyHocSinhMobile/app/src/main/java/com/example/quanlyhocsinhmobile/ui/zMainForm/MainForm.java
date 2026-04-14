@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.quanlyhocsinhmobile.R;
+import com.example.quanlyhocsinhmobile.ui.dai.LoginActivity;
 import com.example.quanlyhocsinhmobile.ui.letrang.MonHocActivity;
 import com.example.quanlyhocsinhmobile.ui.letrang.PhongHocActivity;
 import com.example.quanlyhocsinhmobile.ui.letrang.TKBActivity;
@@ -60,12 +62,37 @@ public class MainForm extends AppCompatActivity {
         findViewById(R.id.btn_phuc_khao).setOnClickListener(v -> showToast("Quản lý phúc khảo"));
 
         // Group 5
-        findViewById(R.id.btn_ho_so_hs).setOnClickListener(v -> showToast("Hồ sơ học sinh (Chi tiết)"));
-        findViewById(R.id.btn_tai_khoan).setOnClickListener(v -> showToast("Quản lý tài khoản user"));
-        findViewById(R.id.btn_chinh_sach).setOnClickListener(v -> showToast("Đối tượng chính sách"));
+        findViewById(R.id.btn_ho_so_hs).setOnClickListener(v -> {
+            Intent intent = new Intent(MainForm.this, com.example.quanlyhocsinhmobile.ui.dai.HocSinhActivity.class);
+            startActivity(intent);
+        });
+        findViewById(R.id.btn_tai_khoan).setOnClickListener(v -> {
+            Intent intent = new Intent(MainForm.this, com.example.quanlyhocsinhmobile.ui.dai.TaiKhoanActivity.class);
+            startActivity(intent);
+        });
+        findViewById(R.id.btn_chinh_sach).setOnClickListener(v -> {
+            Intent intent = new Intent(MainForm.this, com.example.quanlyhocsinhmobile.ui.dai.DoiTuongActivity.class);
+            startActivity(intent);
+        });
         findViewById(R.id.btn_dang_xuat).setOnClickListener(v -> {
-            showToast("Đăng xuất");
-            finish();
+
+            new AlertDialog.Builder(this)
+                    .setTitle("Đăng xuất")
+                    .setMessage("Bạn có chắc muốn đăng xuất?")
+                    .setPositiveButton("Đăng xuất", (dialog, which) -> {
+
+                        Toast.makeText(this, "Đăng xuất thành công", Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(MainForm.this, LoginActivity.class);
+
+                        // Xóa toàn bộ stack
+//                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+                        startActivity(intent);
+                        finish();
+                    })
+                    .setNegativeButton("Hủy", null)
+                    .show();
         });
     }
 

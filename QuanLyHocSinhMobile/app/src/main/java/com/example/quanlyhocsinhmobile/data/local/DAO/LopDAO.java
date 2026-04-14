@@ -16,4 +16,7 @@ public interface LopDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Lop lop);
+
+    @Query("SELECT MaLop FROM Lop")
+    List<String> getAllMaLop();
 }

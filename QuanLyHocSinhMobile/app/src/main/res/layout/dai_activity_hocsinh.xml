@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_primary_blue"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- TITLE -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="8dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="QUẢN LÝ HỌC SINH"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/color_primary_blue_dark"
+                android:padding="16dp"
+                android:background="@color/white"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- SEARCH -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        android:gravity="center_vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/et_search"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="48dp"
+                            android:hint="Tìm học sinh..."
+                            android:background="@android:drawable/edit_text"/>
+
+                        <Button
+                            android:id="@+id/btn_search"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="TÌM"
+                            android:layout_marginStart="8dp"
+                            android:backgroundTint="@color/color_secondary_teal"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- LIST -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp">
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fillViewport="true"
+                        android:scrollbars="horizontal">
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <!-- HEADER -->
+                            <LinearLayout
+                                android:background="@color/color_primary_blue_dark"
+                                android:padding="8dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="120dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="Mã HS"
+                                    android:textColor="@color/white"
+                                    android:gravity="center"
+                                    android:textStyle="bold"
+                                    android:textSize="12sp"/>
+
+                                <TextView
+                                    android:layout_width="180dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="Họ tên"
+                                    android:textColor="@color/white"
+                                    android:gravity="center"
+                                    android:textStyle="bold"
+                                    android:textSize="12sp"/>
+
+                                <TextView
+                                    android:layout_width="150dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="Ngày sinh"
+                                    android:textColor="@color/white"
+                                    android:gravity="center"
+                                    android:textStyle="bold"
+                                    android:textSize="12sp"/>
+
+                                <TextView
+                                    android:layout_width="100dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="GT"
+                                    android:textColor="@color/white"
+                                    android:gravity="center"
+                                    android:textStyle="bold"
+                                    android:textSize="12sp"/>
+
+                                <TextView
+                                    android:layout_width="200dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="Địa chỉ"
+                                    android:textColor="@color/white"
+                                    android:gravity="center"
+                                    android:textStyle="bold"
+                                    android:textSize="12sp"/>
+
+                                <TextView
+                                    android:layout_width="120dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="Lớp"
+                                    android:textColor="@color/white"
+                                    android:gravity="center"
+                                    android:textStyle="bold"
+                                    android:textSize="12sp"/>
+
+                                <TextView
+                                    android:layout_width="120dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="ĐT"
+                                    android:textColor="@color/white"
+                                    android:gravity="center"
+                                    android:textStyle="bold"
+                                    android:textSize="12sp"/>
+
+                            </LinearLayout>
+
+                            <!-- RECYCLER -->
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="250dp"/>
+
+                        </LinearLayout>
+                    </HorizontalScrollView>
+
+                </androidx.cardview.widget.CardView>
+
+                <!-- DETAIL -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="40dp">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:padding="16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tv_info"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Học sinh: --"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/color_primary_blue_dark"
+                            android:layout_marginBottom="16dp"/>
+
+                        <!-- INPUTS -->
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_ma"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Mã học sinh"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_ten"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Họ tên"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_ns"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Chọn ngày sinh"
+                                android:focusable="false"
+                                android:clickable="true"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_gt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Giới tính"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_dc"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Địa chỉ"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <!-- Mã lớp -->
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Mã lớp"
+                            android:textStyle="bold"
+                            android:textColor="@color/color_primary_blue_dark"
+                            android:layout_marginBottom="4dp"/>
+
+                        <Spinner
+                            android:id="@+id/sp_lop"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="12dp"/>
+
+
+                        <!-- Mã đối tượng -->
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Mã đối tượng"
+                            android:textStyle="bold"
+                            android:textColor="@color/color_primary_blue_dark"
+                            android:layout_marginBottom="4dp"/>
+
+                        <Spinner
+                            android:id="@+id/sp_dt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"/>
+
+                        <!-- BUTTONS -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center">
+
+                            <Button
+                                android:id="@+id/btn_add"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_margin="4dp"
+                                android:text="THÊM"
+                                android:backgroundTint="#4CAF50"/>
+
+                            <Button
+                                android:id="@+id/btn_save"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_margin="4dp"
+                                android:text="LƯU"
+                                android:backgroundTint="#2196F3"/>
+
+                            <Button
+                                android:id="@+id/btn_delete"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_margin="4dp"
+                                android:text="XÓA"
+                                android:backgroundTint="#F44336"/>
+                        </LinearLayout>
+
+                        <Button
+                            android:id="@+id/btn_refresh"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="LÀM MỚI"
+                            android:layout_marginTop="8dp"
+                            android:backgroundTint="#FF9800"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
+</FrameLayout>
