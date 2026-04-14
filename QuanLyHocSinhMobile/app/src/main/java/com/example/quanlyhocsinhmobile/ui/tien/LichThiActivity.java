@@ -15,6 +15,7 @@ import com.example.quanlyhocsinhmobile.data.local.Model.LichThi;
 import com.example.quanlyhocsinhmobile.data.local.Model.MonHoc;
 import com.example.quanlyhocsinhmobile.data.local.Model.PhongHoc;
 import com.example.quanlyhocsinhmobile.databinding.TienActivityLichthiBinding;
+import com.example.quanlyhocsinhmobile.utils.FormatDate;
 import com.example.quanlyhocsinhmobile.utils.ExcelHelper;
 
 import java.util.ArrayList;
@@ -176,7 +177,7 @@ public class LichThiActivity extends AppCompatActivity {
             return null;
         }
 
-        String ngayThi = normalizeDateToStorage(ngayThiInput);
+        String ngayThi = FormatDate.normalizeDateToStorage(ngayThiInput);
         if (ngayThi == null) {
             Toast.makeText(this, "Ngày thi không đúng định dạng", Toast.LENGTH_SHORT).show();
             return null;
@@ -200,41 +201,13 @@ public class LichThiActivity extends AppCompatActivity {
     private void displaySelectedLichThi() {
         if (selectedLichThi == null) return;
         binding.etFormTenkythi.setText(selectedLichThi.getTenKyThi());
-        binding.etFormNgaythi.setText(formatDateForDisplay(selectedLichThi.getNgayThi()));
+        binding.etFormNgaythi.setText(FormatDate.formatDateForDisplay(selectedLichThi.getNgayThi()));
         binding.etFormGiobd.setText(selectedLichThi.getGioBatDau());
         binding.etFormGiokt.setText(selectedLichThi.getGioKetThuc());
         for (int i = 0; i < listMonHoc.size(); i++) 
             if (listMonHoc.get(i).getMaMH().equals(selectedLichThi.getMaMH())) binding.spinnerFormMon.setSelection(i);
         for (int i = 0; i < listPhongHoc.size(); i++) 
             if (listPhongHoc.get(i).getMaPhong().equals(selectedLichThi.getMaPhong())) binding.spinnerFormPhong.setSelection(i);
-    }
-
-    private String normalizeDateToStorage(String value) {
-        Date parsed = parseDate(value, "dd/MM/yyyy");
-        if (parsed == null) {
-            parsed = parseDate(value, "yyyy-MM-dd");
-        }
-        if (parsed == null) return null;
-        return new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(parsed);
-    }
-
-    private String formatDateForDisplay(String storageDate) {
-        Date parsed = parseDate(storageDate, "dd/MM/yyyy");
-        if (parsed == null) {
-            parsed = parseDate(storageDate, "yyyy-MM-dd");
-        }
-        if (parsed == null) return storageDate;
-        return new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(parsed);
-    }
-
-    private Date parseDate(String value, String pattern) {
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat(pattern, Locale.getDefault());
-            sdf.setLenient(false);
-            return sdf.parse(value);
-        } catch (ParseException e) {
-            return null;
-        }
     }
 
     private void refreshForm() {

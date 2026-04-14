@@ -139,7 +139,7 @@
                             android:id="@+id/tv_info_dt"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Thông tin đối tượng: --"
+                            android:text="Thông tin đối tượng:"
                             android:textSize="18sp"
                             android:textStyle="bold"
                             android:textColor="@color/color_primary_blue_dark"

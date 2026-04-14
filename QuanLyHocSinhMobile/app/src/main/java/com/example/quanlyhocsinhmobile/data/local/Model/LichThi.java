@@ -24,6 +24,16 @@ public class LichThi {
 
     public LichThi() {}
 
+    public LichThi(int maLT, String tenKyThi, String maMH, String ngayThi, String gioBatDau, String gioKetThuc, String maPhong) {
+        this.maLT = maLT;
+        this.tenKyThi = tenKyThi;
+        this.maMH = maMH;
+        this.ngayThi = ngayThi;
+        this.gioBatDau = gioBatDau;
+        this.gioKetThuc = gioKetThuc;
+        this.maPhong = maPhong;
+    }
+
     public int getMaLT() { return maLT; }
     public void setMaLT(int maLT) { this.maLT = maLT; }
 

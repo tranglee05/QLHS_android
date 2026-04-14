@@ -32,6 +32,7 @@ public class Diem {
 
     public Diem() {}
 
+
     @Ignore
     public Diem(String maHS, String maMH, int hocKy, Double diem15p, Double diem1Tiet, Double diemGiuaKy, Double diemCuoiKy) {
         this.maHS = maHS;
