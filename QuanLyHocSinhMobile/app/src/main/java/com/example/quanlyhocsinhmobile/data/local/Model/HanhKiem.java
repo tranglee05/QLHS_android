@@ -24,14 +24,6 @@ public class HanhKiem {
 
     public HanhKiem() {}
 
-    public HanhKiem(@NonNull String maHS, int hocKy, @NonNull String namHoc, String xepLoai, String nhanXet) {
-        this.maHS = maHS;
-        this.hocKy = hocKy;
-        this.namHoc = namHoc;
-        this.xepLoai = xepLoai;
-        this.nhanXet = nhanXet;
-    }
-
     @NonNull
     public String getMaHS() { return maHS; }
     public void setMaHS(@NonNull String maHS) { this.maHS = maHS; }

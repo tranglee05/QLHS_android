@@ -121,20 +121,39 @@ public class DiemActivity extends AppCompatActivity {
             Toast.makeText(this, "Vui lòng chọn một học sinh", Toast.LENGTH_SHORT).show();
             return;
         }
+        else if(binding.etDiem15p.getText().toString().isEmpty() || binding.etDiem1tiet.getText().toString().isEmpty() || binding.etDiemgk.getText().toString().isEmpty() || binding.etDiemck.getText().toString().isEmpty()){
+            Toast.makeText(this, "Vui lòng nhập đầy đủ điểm", Toast.LENGTH_SHORT).show();
+            return;
+        }
         try {
-            selectedDiem.setDiem15p(Double.parseDouble(binding.etDiem15p.getText().toString()));
-            selectedDiem.setDiem1Tiet(Double.parseDouble(binding.etDiem1tiet.getText().toString()));
-            selectedDiem.setDiemGiuaKy(Double.parseDouble(binding.etDiemgk.getText().toString()));
-            selectedDiem.setDiemCuoiKy(Double.parseDouble(binding.etDiemck.getText().toString()));
+            double diem15p = parseScore(binding.etDiem15p.getText().toString());
+            double diem1Tiet = parseScore(binding.etDiem1tiet.getText().toString());
+            double diemGiuaKy = parseScore(binding.etDiemgk.getText().toString());
+            double diemCuoiKy = parseScore(binding.etDiemck.getText().toString());
+
+            selectedDiem.setDiem15p(diem15p);
+            selectedDiem.setDiem1Tiet(diem1Tiet);
+            selectedDiem.setDiemGiuaKy(diemGiuaKy);
+            selectedDiem.setDiemCuoiKy(diemCuoiKy);
             selectedDiem.setDiemTongKet(selectedDiem.calculateDiemTongKet());
             
             viewModel.update(selectedDiem);
             Toast.makeText(this, "Cập nhật thành công!", Toast.LENGTH_SHORT).show();
             clearForm();
             binding.btnFilter.performClick();
+        } catch (IllegalArgumentException e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             Toast.makeText(this, "Lỗi định dạng điểm!", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private double parseScore(String value) {
+        double score = Double.parseDouble(value.trim());
+        if (score < 0 || score > 10) {
+            throw new IllegalArgumentException("Điểm phải nằm trong khoảng từ 0 đến 10");
+        }
+        return score;
     }
 
     private void clearForm() {
