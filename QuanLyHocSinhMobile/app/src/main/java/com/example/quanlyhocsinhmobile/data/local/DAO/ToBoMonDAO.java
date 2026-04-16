@@ -36,7 +36,7 @@ public interface ToBoMonDAO {
 
     // sua lai
     @Query("SELECT * FROM ToHopMon " +
-            "WHERE MaToHop LIKE :query " +
-            "OR TenToHop LIKE :query ")
+            "WHERE MaToHop LIKE '%' || :query || '%' " +
+            "OR TenToHop LIKE '%' || :query || '%' ")
     List<ToHopMon> searchToHop(String query);
 }

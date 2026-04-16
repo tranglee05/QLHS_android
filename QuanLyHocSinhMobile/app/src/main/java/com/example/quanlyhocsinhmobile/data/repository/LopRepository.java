@@ -3,9 +3,7 @@ package com.example.quanlyhocsinhmobile.data.repository;
 import android.app.Application;
 
 import com.example.quanlyhocsinhmobile.data.local.AppDatabase;
-import com.example.quanlyhocsinhmobile.data.local.DAO.GiaoVienDAO;
 import com.example.quanlyhocsinhmobile.data.local.DAO.LopDAO;
-import com.example.quanlyhocsinhmobile.data.local.Model.GiaoVien;
 import com.example.quanlyhocsinhmobile.data.local.Model.Lop;
 
 import java.util.List;
@@ -36,7 +34,7 @@ public class LopRepository {
     }
 
     public void delete(Lop lop){
-        AppDatabase.databaseWriteExecutor.execute(() -> lopDAO.update(lop));
+        AppDatabase.databaseWriteExecutor.execute(() -> lopDAO.delete(lop));
     }
 
     public int checkMaLop(String maLop) {
@@ -48,6 +46,14 @@ public class LopRepository {
 
     public int checkGVCNTonTai(String maGV){
         return lopDAO.checkGVCNTonTai(maGV);
+    }
+
+    public int checkGiaoVienTonTai(String maGV) {
+        return lopDAO.checkGiaoVienTonTai(maGV);
+    }
+
+    public int checkGVCNDaPhanCong(String maGV) {
+        return lopDAO.checkGVCNDaPhanCong(maGV);
     }
 
 }

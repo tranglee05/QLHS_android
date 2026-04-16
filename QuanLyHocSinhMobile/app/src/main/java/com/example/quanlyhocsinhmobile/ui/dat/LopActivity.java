@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlyhocsinhmobile.R;
-import com.example.quanlyhocsinhmobile.data.local.Model.GiaoVien;
 import com.example.quanlyhocsinhmobile.data.local.Model.Lop;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -59,14 +58,14 @@ public class LopActivity extends AppCompatActivity {
 
         // 🔍 SEARCH
         btnSearch.setOnClickListener(v ->
-                viewModel.search("%" + etSearch.getText().toString().trim() + "%")
+                viewModel.search(etSearch.getText().toString().trim())
         );
 
         // ➕ ADD
         btnAdd.setOnClickListener(v -> {
             String ma = et_ma_lop.getText().toString().trim();
             String ten = et_ten_lop.getText().toString().trim();
-            String nienKhoa = et_ten_lop.getText().toString().trim();
+            String nienKhoa = et_nien_khoa.getText().toString().trim();
             String maGVCN = et_giao_vien.getText().toString().trim();
 
             if (ma.isEmpty() || ten.isEmpty() || nienKhoa.isEmpty() || maGVCN.isEmpty()) {
@@ -84,9 +83,9 @@ public class LopActivity extends AppCompatActivity {
                 return;
             }
 
-            String ten = et_ma_lop.getText().toString().trim();
-            String maGVCN = et_ten_lop.getText().toString().trim();
-            String nienKhoa = et_ten_lop.getText().toString().trim();
+            String ten = et_ten_lop.getText().toString().trim();
+            String maGVCN = et_giao_vien.getText().toString().trim();
+            String nienKhoa = et_nien_khoa.getText().toString().trim();
 
             viewModel.update(selectedLop, ten, maGVCN, nienKhoa); // ❗ FIX thiếu param
         });

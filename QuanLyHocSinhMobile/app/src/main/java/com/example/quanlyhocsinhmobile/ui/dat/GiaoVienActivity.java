@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.quanlyhocsinhmobile.data.local.Model.GiaoVien;
 import com.example.quanlyhocsinhmobile.databinding.DatActivityGiaovienBinding;
+import com.example.quanlyhocsinhmobile.utils.FormatDate;
 
 import java.util.ArrayList;
 
@@ -53,7 +54,7 @@ public class GiaoVienActivity extends AppCompatActivity {
         // 🔍 Search
         binding.btnSearch.setOnClickListener(v -> {
             String q = binding.etSearch.getText().toString();
-            if (!q.isEmpty()) viewModel.search("%" + q + "%");
+            if (!q.isEmpty()) viewModel.search(q.trim());
             else viewModel.loadAllGiaoViens();
         });
 
@@ -99,13 +100,19 @@ public class GiaoVienActivity extends AppCompatActivity {
 
         String ma = binding.etMaGiaoVien.getText().toString().trim();
         String ten = binding.etTenGv.getText().toString().trim();
-        String ngaySinh = binding.etNgaySinh.getText().toString().trim();
+        String ngaySinhInput = binding.etNgaySinh.getText().toString().trim();
         String sdt = binding.etSdt.getText().toString().trim();
         String maToHop = binding.etMaToHop.getText().toString().trim();
         String maMH = binding.etTenMon.getText().toString().trim();
+        String ngaySinh = FormatDate.normalizeDateToStorage(ngaySinhInput);
 
         if (ma.isEmpty() || ten.isEmpty()) {
             Toast.makeText(this, "Nhập thiếu thông tin", Toast.LENGTH_SHORT).show();
+            return null;
+        }
+
+        if (!ngaySinhInput.isEmpty() && ngaySinh == null) {
+            Toast.makeText(this, "Ngày sinh không đúng định dạng dd/MM/yyyy", Toast.LENGTH_SHORT).show();
             return null;
         }
 
@@ -127,7 +134,7 @@ public class GiaoVienActivity extends AppCompatActivity {
 
         binding.etMaGiaoVien.setText(gv.getMaGV());
         binding.etTenGv.setText(gv.getHoTen());
-        binding.etNgaySinh.setText(gv.getNgaySinh());
+        binding.etNgaySinh.setText(FormatDate.formatDateForDisplay(gv.getNgaySinh()));
         binding.etSdt.setText(gv.getSdt());
 
         binding.etMaToHop.setText(gv.getMaToHop());

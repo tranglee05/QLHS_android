@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlyhocsinhmobile.R;
 import com.example.quanlyhocsinhmobile.data.local.Model.GiaoVien;
+import com.example.quanlyhocsinhmobile.utils.FormatDate;
 
 import java.util.List;
 
@@ -74,7 +75,7 @@ public class GiaoVienAdapter extends RecyclerView.Adapter<GiaoVienAdapter.ViewHo
 
             tvMaGV.setText(giaoVien.getMaGV());
             tvTenGV.setText(giaoVien.getHoTen());
-            tvNgaySinh.setText(giaoVien.getNgaySinh());
+            tvNgaySinh.setText(FormatDate.formatDateForDisplay(giaoVien.getNgaySinh()));
             TvSDT.setText(giaoVien.getSdt());
 
             // ✅ ưu tiên tên, fallback mã

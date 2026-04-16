@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlyhocsinhmobile.R;
 import com.example.quanlyhocsinhmobile.data.local.Model.HocSinh;
+import com.example.quanlyhocsinhmobile.utils.FormatDate;
 
 import java.util.List;
 
@@ -47,7 +48,7 @@ public class HocSinhAdapter extends RecyclerView.Adapter<HocSinhAdapter.VH> {
         // bind đủ 7 cột
         h.tvMa.setText(hs.getMaHS());
         h.tvTen.setText(hs.getHoTen());
-        h.tvNS.setText(hs.getNgaySinh());
+        h.tvNS.setText(FormatDate.formatDateForDisplay(hs.getNgaySinh()));
         h.tvGT.setText(hs.getGioiTinh());
         h.tvDC.setText(hs.getDiaChi());
         h.tvLop.setText(hs.getMaLop());

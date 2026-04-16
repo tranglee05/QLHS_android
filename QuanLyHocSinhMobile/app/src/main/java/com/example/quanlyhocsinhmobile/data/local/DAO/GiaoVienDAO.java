@@ -40,11 +40,11 @@ public interface GiaoVienDAO {
             "FROM GiaoVien " +
             "LEFT JOIN ToHopMon ON GiaoVien.maToHop = ToHopMon.maToHop " +
             "LEFT JOIN MonHoc ON GiaoVien.maMH = MonHoc.maMH " +
-            "WHERE GiaoVien.hoTen LIKE :query " +
-            "OR GiaoVien.maGV LIKE :query " +
-            "OR GiaoVien.sdt LIKE :query " +
-            "OR GiaoVien.maToHop LIKE :query " +
-            "OR MonHoc.TenMH LIKE :query")
+            "WHERE GiaoVien.hoTen LIKE '%' || :query || '%' " +
+            "OR GiaoVien.maGV LIKE '%' || :query || '%' " +
+            "OR GiaoVien.sdt LIKE '%' || :query || '%' " +
+            "OR GiaoVien.maToHop LIKE '%' || :query || '%' " +
+            "OR MonHoc.TenMH LIKE '%' || :query || '%'")
 
     List<GiaoVien.Display> searchGiaoVien(String query);
 }

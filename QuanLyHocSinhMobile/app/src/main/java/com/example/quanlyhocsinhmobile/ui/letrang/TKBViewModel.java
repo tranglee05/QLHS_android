@@ -22,7 +22,7 @@ public class TKBViewModel extends AndroidViewModel {
     private final MutableLiveData<List<ThoiKhoaBieu.Display>> tkbList = new MutableLiveData<>();
     private final MutableLiveData<List<Lop>> lops = new MutableLiveData<>();
     private final MutableLiveData<List<MonHoc>> monHocs = new MutableLiveData<>();
-    private final MutableLiveData<List<GiaoVien>> giaoViens = new MutableLiveData<>();
+    private final MutableLiveData<List<GiaoVien.Display>> giaoViens = new MutableLiveData<>();
     private final MutableLiveData<List<PhongHoc>> phongHocs = new MutableLiveData<>();
     private final MutableLiveData<String> toastMessage = new MutableLiveData<>();
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -36,7 +36,7 @@ public class TKBViewModel extends AndroidViewModel {
     public LiveData<List<ThoiKhoaBieu.Display>> getTkbList() { return tkbList; }
     public LiveData<List<Lop>> getLops() { return lops; }
     public LiveData<List<MonHoc>> getMonHocs() { return monHocs; }
-    public LiveData<List<GiaoVien>> getGiaoViens() { return giaoViens; }
+    public LiveData<List<GiaoVien.Display>> getGiaoViens() { return giaoViens; }
     public LiveData<List<PhongHoc>> getPhongHocs() { return phongHocs; }
     public LiveData<String> getToastMessage() { return toastMessage; }
 

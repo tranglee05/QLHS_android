@@ -75,13 +75,13 @@ public class LopViewModel extends AndroidViewModel {
             }
 
             // Check giáo viên tồn tại
-            if (repository.checkGVCNTonTai(maGVCN) == 0) {
+            if (repository.checkGiaoVienTonTai(maGVCN) == 0) {
                 toastMessage.postValue("Giáo viên chủ nhiệm không tồn tại!");
                 return;
             }
 
             // Check giáo viên đã làm GVCN chưa
-            if (repository.checkGVCNTonTai(maGVCN) > 0) {
+            if (repository.checkGVCNDaPhanCong(maGVCN) > 0) {
                 toastMessage.postValue("Giáo viên này đã là GVCN lớp khác!");
                 return;
             }
@@ -121,14 +121,14 @@ public class LopViewModel extends AndroidViewModel {
             }
 
             // Check giáo viên tồn tại
-            if (repository.checkGVCNTonTai(maGVCN) == 0) {
+            if (repository.checkGiaoVienTonTai(maGVCN) == 0) {
                 toastMessage.postValue("Giáo viên chủ nhiệm không tồn tại!");
                 return;
             }
 
             // Check GVCN đã chủ nhiệm lớp khác chưa (trừ chính lớp đang sửa)
             if (!selectedLop.getMaGVCN().equals(maGVCN)
-                    && repository.checkGVCNTonTai(maGVCN) > 0) {
+                    && repository.checkGVCNDaPhanCong(maGVCN) > 0) {
                 toastMessage.postValue("Giáo viên này đã là GVCN lớp khác!");
                 return;
             }

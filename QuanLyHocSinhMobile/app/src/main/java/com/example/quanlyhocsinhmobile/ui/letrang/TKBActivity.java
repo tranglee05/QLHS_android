@@ -37,7 +37,7 @@ public class TKBActivity extends AppCompatActivity {
     
     private List<Lop> listLop = new ArrayList<>();
     private List<MonHoc> listMonHoc = new ArrayList<>();
-    private List<GiaoVien> listGiaoVien = new ArrayList<>();
+    private List<GiaoVien.Display> listGiaoVien = new ArrayList<>();
     private List<PhongHoc> listPhongHoc = new ArrayList<>();
 
     private ThoiKhoaBieu currentSelectedTKB = null;
@@ -145,7 +145,7 @@ public class TKBActivity extends AppCompatActivity {
 
         tkb.setMaLop(listLop.get(lopPos - 1).getMaLop());
         tkb.setMaMH(listMonHoc.get(monPos - 1).getMaMH());
-        tkb.setMaGV(listGiaoVien.get(gvPos - 1).getMaGV());
+        tkb.setMaGV(listGiaoVien.get(gvPos - 1).getGiaoVien().getMaGV());
         tkb.setMaPhong(listPhongHoc.get(phongPos - 1).getMaPhong());
         tkb.setThu(thuPos + 1);
         tkb.setTietBatDau(tbdPos);
@@ -190,7 +190,7 @@ public class TKBActivity extends AppCompatActivity {
             this.listGiaoVien = gvs;
             List<String> names = new ArrayList<>();
             names.add("--- Chọn GV ---");
-            for (GiaoVien g : gvs) names.add(g.getHoTen());
+            for (GiaoVien.Display g : gvs) names.add(g.getGiaoVien().getHoTen());
             spUpdateTeacher.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, names));
         });
 

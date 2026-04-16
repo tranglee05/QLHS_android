@@ -109,7 +109,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
-                            android:background="@color/color_primary_blue"
+                            android:background="@color/color_primary_blue_dark"
                             android:padding="10dp">
 
                             <TextView
@@ -168,7 +168,7 @@
                             android:id="@+id/tv_to_bo_mon_info"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="TỔ HỢP: --"
+                            android:text="TỔ HỢP:"
                             android:textSize="18sp"
                             android:textStyle="bold"
                             android:textColor="@color/color_primary_blue_dark"

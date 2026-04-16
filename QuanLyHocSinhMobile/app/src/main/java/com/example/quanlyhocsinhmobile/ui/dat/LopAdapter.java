@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlyhocsinhmobile.R;
-import com.example.quanlyhocsinhmobile.data.local.Model.GiaoVien;
 import com.example.quanlyhocsinhmobile.data.local.Model.Lop;
 
 import java.util.List;
@@ -43,12 +42,15 @@ public class LopAdapter extends RecyclerView.Adapter<LopAdapter.ViewHolder>{
         Lop lop = list.get(position);
 
         holder.tvMaLop.setText(lop.getMaLop());
-        holder.tvGiaoVien.setText(lop.getTenLop());
+        holder.tvTenLop.setText(lop.getTenLop());
         holder.tvNienKhoa.setText(lop.getNienKhoa());
         holder.tvGiaoVien.setText(lop.getMaGVCN());
 
-
-        holder.itemView.setOnClickListener(v -> listener.onItemClick(lop));
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onItemClick(lop);
+            }
+        });
     }
 
     @Override

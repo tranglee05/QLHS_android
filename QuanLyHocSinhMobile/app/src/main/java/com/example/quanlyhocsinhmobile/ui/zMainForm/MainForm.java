@@ -8,6 +8,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.quanlyhocsinhmobile.R;
+import com.example.quanlyhocsinhmobile.ui.dai.LoginActivity;
+import com.example.quanlyhocsinhmobile.ui.dat.GiaoVienActivity;
+import com.example.quanlyhocsinhmobile.ui.dat.LopActivity;
+import com.example.quanlyhocsinhmobile.ui.dat.ToBoMonActivity;
 import com.example.quanlyhocsinhmobile.ui.letrang.MonHocActivity;
 import com.example.quanlyhocsinhmobile.ui.letrang.PhongHocActivity;
 import com.example.quanlyhocsinhmobile.ui.letrang.TKBActivity;
@@ -24,7 +28,7 @@ public class MainForm extends AppCompatActivity {
 
     private void setupButtons() {
         // Group 1
-        findViewById(R.id.btn_lop_hoc).setOnClickListener(v -> {;
+        findViewById(R.id.btn_lop_hoc).setOnClickListener(v -> {
             Intent intent = new Intent(MainForm.this, LopActivity.class);
             startActivity(intent);
         });

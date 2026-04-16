@@ -13,7 +13,7 @@ public class ToBoHopRepository {
     private ToBoMonDAO toBoMonDAO;
 
     public  ToBoHopRepository(ToBoMonDAO getToBoMonDAO){
-        this.toBoMonDAO = toBoMonDAO;
+        this.toBoMonDAO = getToBoMonDAO;
     }
     public ToBoHopRepository(Application application) {
         AppDatabase db = AppDatabase.getDatabase(application);

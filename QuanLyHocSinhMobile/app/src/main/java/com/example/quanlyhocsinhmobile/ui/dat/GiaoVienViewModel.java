@@ -90,6 +90,22 @@ public class GiaoVienViewModel extends AndroidViewModel {
 
         });
     }
+
+    public void insert(GiaoVien giaoVien) {
+        if (giaoVien == null) {
+            toastMessage.setValue("Dữ liệu giáo viên không hợp lệ");
+            return;
+        }
+        insert(
+                giaoVien.getMaGV(),
+                giaoVien.getHoTen(),
+                giaoVien.getNgaySinh(),
+                giaoVien.getSdt(),
+                giaoVien.getMaToHop(),
+                giaoVien.getMaMH()
+        );
+    }
+
     public void update(GiaoVien selectedGiaoVien, String ten) {
         if (selectedGiaoVien == null) {
             toastMessage.setValue("Vui lòng chọn giáo viên để sửa");
@@ -112,6 +128,24 @@ public class GiaoVienViewModel extends AndroidViewModel {
             loadAllGiaoViens();
         });
     }
+
+    public void update(GiaoVien giaoVien) {
+        if (giaoVien == null) {
+            toastMessage.setValue("Vui lòng chọn giáo viên để sửa");
+            return;
+        }
+        if (giaoVien.getMaGV() == null || giaoVien.getMaGV().trim().isEmpty() || giaoVien.getHoTen() == null || giaoVien.getHoTen().trim().isEmpty()) {
+            toastMessage.setValue("Vui lòng nhập đầy đủ mã và tên giáo viên");
+            return;
+        }
+
+        executor.execute(() -> {
+            repository.update(giaoVien);
+            toastMessage.postValue("Cập nhật thành công");
+            loadAllGiaoViens();
+        });
+    }
+
     public void delete(GiaoVien selectedGiaoVien) {
         if (selectedGiaoVien == null) {
             toastMessage.setValue("Vui lòng chọn giáo viên để xoá ");

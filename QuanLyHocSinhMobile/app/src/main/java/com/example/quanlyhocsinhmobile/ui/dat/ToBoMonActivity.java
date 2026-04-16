@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlyhocsinhmobile.R;
-import com.example.quanlyhocsinhmobile.data.local.Model.GiaoVien;
 import com.example.quanlyhocsinhmobile.data.local.Model.ToHopMon;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -72,7 +71,7 @@ public class ToBoMonActivity extends AppCompatActivity {
 
         btnSave.setOnClickListener(v -> {
             if (selectedToHop == null) {
-                Toast.makeText(this, "Chưa chọn giáo viên", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Chưa chọn tổ bộ môn", Toast.LENGTH_SHORT).show();
                 return;
             }
             viewModel.update(selectedToHop, etTenToHop.getText().toString().trim());
@@ -80,7 +79,7 @@ public class ToBoMonActivity extends AppCompatActivity {
 
         btnDelete.setOnClickListener(v -> {
             if (selectedToHop == null) {
-                Toast.makeText(this, "Chưa chọn giáo viên", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Chưa chọn tổ bộ môn", Toast.LENGTH_SHORT).show();
                 return;
             }
             viewModel.delete(selectedToHop);

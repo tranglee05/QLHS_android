@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.quanlyhocsinhmobile.R;
 import com.example.quanlyhocsinhmobile.data.local.AppDatabase;
 import com.example.quanlyhocsinhmobile.data.local.Model.HocSinh;
+import com.example.quanlyhocsinhmobile.utils.FormatDate;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
@@ -84,10 +85,10 @@ public class HocSinhActivity extends AppCompatActivity {
                     this,
                     (view, y, m, d) -> {
                         String display = String.format("%02d/%02d/%d", d, m + 1, y);
-                        String db = String.format("%d-%02d-%02d", y, m + 1, d);
+                        String normalized = FormatDate.normalizeDateToStorage(display);
 
                         etNs.setText(display);
-                        etNs.setTag(db);
+                        etNs.setTag(normalized);
                         etNs.setError(null);
                     },
                     defaultYear,
@@ -156,10 +157,9 @@ public class HocSinhActivity extends AppCompatActivity {
             ma.setText(hs.getMaHS());
             ten.setText(hs.getHoTen());
 
-            if (hs.getNgaySinh() != null && hs.getNgaySinh().contains("-")) {
-                String[] p = hs.getNgaySinh().split("-");
-                etNs.setText(p[2] + "/" + p[1] + "/" + p[0]);
-                etNs.setTag(hs.getNgaySinh());
+            if (hs.getNgaySinh() != null && !hs.getNgaySinh().trim().isEmpty()) {
+                etNs.setText(FormatDate.formatDateForDisplay(hs.getNgaySinh()));
+                etNs.setTag(FormatDate.normalizeDateToStorage(hs.getNgaySinh()));
             }
 
             gt.setText(hs.getGioiTinh());
