@@ -13,6 +13,7 @@
         app:cardElevation="8dp">
 
         <TextView
+            android:id="@+id/tv_title_hocphi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="QUẢN LÝ HỌC PHÍ"
@@ -38,7 +39,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1. BỘ LỌC"
+                android:text="BỘ LỌC"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -87,7 +88,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="2. DANH SÁCH HỌC PHÍ"
+                android:text="DANH SÁCH HỌC PHÍ"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -183,7 +184,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="3. CẬP NHẬT HỌC PHÍ"
+                android:text="CẬP NHẬT HỌC PHÍ"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold" />
