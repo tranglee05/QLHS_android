@@ -1,5 +1,6 @@
 package com.example.quanlyhocsinhmobile.ui.zMainForm;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,7 +12,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.quanlyhocsinhmobile.R;
-import com.example.quanlyhocsinhmobile.ui.dai.LoginActivity;
+import com.example.quanlyhocsinhmobile.utils.LoginActivity;
 import com.example.quanlyhocsinhmobile.ui.dat.GiaoVienActivity;
 import com.example.quanlyhocsinhmobile.ui.dat.LopActivity;
 import com.example.quanlyhocsinhmobile.ui.dat.ToBoMonActivity;
@@ -44,7 +45,7 @@ public class MainForm extends AppCompatActivity {
             findViewById(R.id.btn_hoc_phi).setVisibility(View.GONE);
             findViewById(R.id.btn_tai_khoan).setVisibility(View.GONE);
             findViewById(R.id.btn_chinh_sach).setVisibility(View.GONE);
-            
+
             Button btnGiaoVien = findViewById(R.id.btn_giao_vien);
             if (btnGiaoVien != null) {
                 btnGiaoVien.setText("HỒ SƠ GIÁO VIÊN");
@@ -52,14 +53,14 @@ public class MainForm extends AppCompatActivity {
         } else if ("HocSinh".equals(quyen)) {
             View tvHoso = findViewById(R.id.tv_Hoso);
             if (tvHoso != null) tvHoso.setVisibility(View.GONE);
-            
+
             findViewById(R.id.btn_lop_hoc).setVisibility(View.GONE);
             findViewById(R.id.btn_giao_vien).setVisibility(View.GONE);
             findViewById(R.id.btn_to_bo_mon).setVisibility(View.GONE);
-            
+
             findViewById(R.id.btn_mon_hoc).setVisibility(View.GONE);
             findViewById(R.id.btn_thiet_bi).setVisibility(View.GONE);
-            
+
             findViewById(R.id.btn_tai_khoan).setVisibility(View.GONE);
             findViewById(R.id.btn_chinh_sach).setVisibility(View.GONE);
         }
@@ -68,72 +69,57 @@ public class MainForm extends AppCompatActivity {
     private void setupButtons() {
         // Group 1
         findViewById(R.id.btn_lop_hoc).setOnClickListener(v -> {
-            Intent intent = new Intent(MainForm.this, LopActivity.class);
-            startActivity(intent);
+            navigateTo(LopActivity.class, "Lớp học");
         });
         findViewById(R.id.btn_giao_vien).setOnClickListener(v -> {
-            Intent intent = new Intent(MainForm.this, GiaoVienActivity.class);
-            startActivity(intent);
+            navigateTo(GiaoVienActivity.class, "Giáo viên");
         });
         findViewById(R.id.btn_to_bo_mon).setOnClickListener(v -> {
-            Intent intent = new Intent(MainForm.this, ToBoMonActivity.class);
-            startActivity(intent);
+            navigateTo(ToBoMonActivity.class, "Tổ bộ môn");
         });
 
         // Group 2
         findViewById(R.id.btn_mon_hoc).setOnClickListener(v -> {
-            Intent intent = new Intent(MainForm.this, MonHocActivity.class);
-            startActivity(intent);
+            navigateTo(MonHocActivity.class, "Môn học");
         });
         findViewById(R.id.btn_lich_day).setOnClickListener(v -> {
-            Intent intent = new Intent(MainForm.this, TKBActivity.class);
-            startActivity(intent);
+            navigateTo(TKBActivity.class, "Lịch dạy");
         });
         findViewById(R.id.btn_thiet_bi).setOnClickListener(v -> {
-            Intent intent = new Intent(MainForm.this, PhongHocActivity.class);
-            startActivity(intent);
+            navigateTo(PhongHocActivity.class, "Phòng học");
         });
 
         // Group 3
         findViewById(R.id.btn_diem_so).setOnClickListener(v -> {
-            Intent intent = new Intent(MainForm.this, com.example.quanlyhocsinhmobile.ui.tien.DiemActivity.class);
-            startActivity(intent);
+            navigateTo(com.example.quanlyhocsinhmobile.ui.tien.DiemActivity.class, "Điểm số");
         });
         findViewById(R.id.btn_hanh_kiem).setOnClickListener(v -> {
-            Intent intent = new Intent(MainForm.this, com.example.quanlyhocsinhmobile.ui.tien.HanhKiemActivity.class);
-            startActivity(intent);
+            navigateTo(com.example.quanlyhocsinhmobile.ui.tien.HanhKiemActivity.class, "Hạnh kiểm");
         });
         findViewById(R.id.btn_lich_thi).setOnClickListener(v -> {
-            Intent intent = new Intent(MainForm.this, com.example.quanlyhocsinhmobile.ui.tien.LichThiActivity.class);
-            startActivity(intent);
+            navigateTo(com.example.quanlyhocsinhmobile.ui.tien.LichThiActivity.class, "Lịch thi");
         });
 
         // Group 4
-        findViewById(R.id.btn_hoc_phi).setOnClickListener(v ->{
-            Intent intent = new Intent(MainForm.this, com.example.quanlyhocsinhmobile.ui.hatrang.HocPhiActivity.class);
-            startActivity(intent);
+        findViewById(R.id.btn_hoc_phi).setOnClickListener(v -> {
+            navigateTo(com.example.quanlyhocsinhmobile.ui.hatrang.HocPhiActivity.class, "Học phí");
         });
-        findViewById(R.id.btn_thong_bao).setOnClickListener(v ->{
-            Intent intent = new Intent(MainForm.this, com.example.quanlyhocsinhmobile.ui.hatrang.ThongBaoActivity.class);
-            startActivity(intent);
+        findViewById(R.id.btn_thong_bao).setOnClickListener(v -> {
+            navigateTo(com.example.quanlyhocsinhmobile.ui.hatrang.ThongBaoActivity.class, "Thông báo");
         });
-        findViewById(R.id.btn_phuc_khao).setOnClickListener(v ->{
-            Intent intent = new Intent(MainForm.this, com.example.quanlyhocsinhmobile.ui.hatrang.PhucKhaoActivity.class);
-            startActivity(intent);
+        findViewById(R.id.btn_phuc_khao).setOnClickListener(v -> {
+            navigateTo(com.example.quanlyhocsinhmobile.ui.hatrang.PhucKhaoActivity.class, "Phúc khảo");
         });
 
         // Group 5
         findViewById(R.id.btn_ho_so_hs).setOnClickListener(v -> {
-            Intent intent = new Intent(MainForm.this, com.example.quanlyhocsinhmobile.ui.dai.HocSinhActivity.class);
-            startActivity(intent);
+            navigateTo(com.example.quanlyhocsinhmobile.ui.dai.HocSinhActivity.class, "Hồ sơ học sinh");
         });
         findViewById(R.id.btn_tai_khoan).setOnClickListener(v -> {
-            Intent intent = new Intent(MainForm.this, com.example.quanlyhocsinhmobile.ui.dai.TaiKhoanActivity.class);
-            startActivity(intent);
+            navigateTo(com.example.quanlyhocsinhmobile.ui.dai.TaiKhoanActivity.class, "Tài khoản");
         });
         findViewById(R.id.btn_chinh_sach).setOnClickListener(v -> {
-            Intent intent = new Intent(MainForm.this, com.example.quanlyhocsinhmobile.ui.dai.DoiTuongActivity.class);
-            startActivity(intent);
+            navigateTo(com.example.quanlyhocsinhmobile.ui.dai.DoiTuongActivity.class, "Chính sách");
         });
         findViewById(R.id.btn_dang_xuat).setOnClickListener(v -> {
 
@@ -151,6 +137,16 @@ public class MainForm extends AppCompatActivity {
                     .setNegativeButton("Hủy", null)
                     .show();
         });
+    }
+
+    private void navigateTo(Class<?> activityClass, String featureName) {
+        try {
+            startActivity(new Intent(MainForm.this, activityClass));
+        } catch (ActivityNotFoundException e) {
+            showToast("Không mở được chức năng " + featureName + ".");
+        } catch (Exception e) {
+            showToast("Chức năng " + featureName + " đang gặp lỗi.");
+        }
     }
 
     private void showToast(String message) {

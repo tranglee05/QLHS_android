@@ -7,46 +7,58 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:layout_height="wrap_content"
+android:textColor="@color/black"
         android:id="@+id/tv_mahs"
         android:layout_width="80dp"
-        android:text="HS01"/>
+        android:layout_height="wrap_content"
+        android:text="HS01" />
+
     <TextView
+        android:textColor="@color/black"
+        android:id="@+id/tv_namhoc"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="2024-2025" />
+
+    <TextView
+        android:textColor="@color/black"
         android:layout_height="wrap_content"
         android:id="@+id/tv_hoten"
         android:layout_width="150dp"
         android:text="Nguyễn Văn A"/>
     <TextView
+        android:textColor="@color/black"
         android:layout_height="wrap_content"
         android:id="@+id/tv_lop"
         android:layout_width="80dp"
         android:text="10A1"/>
     <TextView
+        android:textColor="@color/black"
         android:layout_height="wrap_content"
         android:id="@+id/tv_hk"
         android:layout_width="60dp"
         android:text="1"/>
+
     <TextView
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_namhoc"
-        android:layout_width="100dp"
-        android:text="2024-2025"/>
-    <TextView
+        android:textColor="@color/black"
         android:layout_height="wrap_content"
         android:id="@+id/tv_tongtien"
         android:layout_width="120dp"
         android:text="5,000,000"/>
     <TextView
+        android:textColor="@color/black"
         android:layout_height="wrap_content"
         android:id="@+id/tv_miengiam"
         android:layout_width="120dp"
         android:text="500,000"/>
     <TextView
+        android:textColor="@color/black"
         android:layout_height="wrap_content"
         android:id="@+id/tv_phaidong"
         android:layout_width="120dp"
         android:text="4,500,000"/>
     <TextView
+        android:textColor="@color/black"
         android:layout_height="wrap_content"
         android:id="@+id/tv_trangthai"
         android:layout_width="120dp"

@@ -1,20 +1,37 @@
 package com.example.quanlyhocsinhmobile.data.local;
 
 import android.database.Cursor;
+import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 public class KhoiTaoDatabase {
 
+    private static final String TAG = "KhoiTaoDatabase";
+
     public static void checkAndSeedData(@NonNull SupportSQLiteDatabase db) {
-        if (isTableEmpty(db, "HocSinh")) {
-            seedData(db);
+        try {
+            if (isSeedDataMissing(db)) {
+                seedData(db);
+            }
+            seedTaiKhoanIfNeeded(db);
+        } catch (Exception e) {
+            Log.e(TAG, "Loi khoi tao du lieu", e);
         }
+    }
+
+    private static boolean isSeedDataMissing(SupportSQLiteDatabase db) {
+        // Chi can thieu 1 bang nen tang la se seed lai du lieu mau
+        return isTableEmpty(db, "MonHoc")
+                || isTableEmpty(db, "PhongHoc")
+                || isTableEmpty(db, "GiaoVien")
+                || isTableEmpty(db, "Lop")
+                || isTableEmpty(db, "HocSinh");
     }
 
     private static boolean isTableEmpty(SupportSQLiteDatabase db, String tableName) {
         try (Cursor cursor = db.query("SELECT COUNT(*) FROM " + tableName)) {
-            if (cursor != null && cursor.moveToFirst()) {
+            if (cursor.moveToFirst()) {
                 return cursor.getInt(0) == 0;
             }
         } catch (Exception e) {
@@ -26,7 +43,7 @@ public class KhoiTaoDatabase {
     private static void seedData(SupportSQLiteDatabase db) {
         db.beginTransaction();
         try {
-            // ==========================================
+// ==========================================
 // 1. DANH MỤC CƠ BẢN
 // ==========================================
             db.execSQL("INSERT INTO DoiTuongUuTien (MaDT, TenDT, TiLeGiamHocPhi) VALUES " +
@@ -166,25 +183,54 @@ public class KhoiTaoDatabase {
 // ==========================================
 // 5. HỆ THỐNG (TÀI KHOẢN, THÔNG BÁO, LỊCH THI...)
 // ==========================================
-            db.execSQL("INSERT INTO TaiKhoan (TenDangNhap, MatKhau, Quyen, MaNguoiDung) VALUES " +
+            db.execSQL("INSERT OR IGNORE INTO TaiKhoan (TenDangNhap, MatKhau, Quyen, MaNguoiDung) VALUES " +
                     "('admin', '123456', 'Admin', 'AD01'), ('gv01', '123456', 'GiaoVien', 'GV01'), ('hs001', '123456', 'HocSinh', 'HS001');");
 
             db.execSQL("INSERT INTO ThongBao (TieuDe, NoiDung, ngayTao, NguoiGui) VALUES " +
                     "('Lịch nghỉ lễ', 'Nghỉ lễ 30/4 từ ngày 30/04 đến 03/05','2026-03-01', 'AD01');");
 
-            db.execSQL("INSERT INTO LichThi (TenKyThi, MaMH, NgayThi, GioBatDau, GioKetThuc, MaPhong) VALUES " +
-                    "('Thi Giữa Kỳ 1', 'MH01', '2026-10-15', '07:30', '09:00', 'P101');");
+            db.execSQL("INSERT INTO LichThi (TenKyThi, MaMH, NgayThi, GioBatDau, GioKetThuc, MaPhong) VALUES ('Thi Giữa Kỳ 1', 'MH02', '2026-10-15', '09:30', '11:00', 'P102');");
+            db.execSQL("INSERT INTO LichThi (TenKyThi, MaMH, NgayThi, GioBatDau, GioKetThuc, MaPhong) VALUES ('Thi Giữa Kỳ 1', 'MH03', '2026-10-16', '07:30', '09:00', 'P201');");
+            db.execSQL("INSERT INTO LichThi (TenKyThi, MaMH, NgayThi, GioBatDau, GioKetThuc, MaPhong) VALUES ('Thi Giữa Kỳ 1', 'MH04', '2026-10-16', '13:30', '15:00', 'P101');");
+            db.execSQL("INSERT INTO LichThi (TenKyThi, MaMH, NgayThi, GioBatDau, GioKetThuc, MaPhong) VALUES ('Thi Cuối Kỳ 1', 'MH01', '2026-12-20', '07:30', '09:30', 'P101');");
+            db.execSQL("INSERT INTO LichThi (TenKyThi, MaMH, NgayThi, GioBatDau, GioKetThuc, MaPhong) VALUES ('Thi Cuối Kỳ 1', 'MH05', '2026-12-21', '08:00', '10:00', 'P201');");
+            db.execSQL("INSERT INTO LichThi (TenKyThi, MaMH, NgayThi, GioBatDau, GioKetThuc, MaPhong) VALUES ('Thi Cuối Kỳ 1', 'MH06', '2026-12-22', '14:00', '16:00', 'P102');");
+            db.execSQL("INSERT INTO LichThi (TenKyThi, MaMH, NgayThi, GioBatDau, GioKetThuc, MaPhong) VALUES ('Thi Khảo Sát', 'MH07', '2026-09-05', '07:30', '08:15', 'P201');");
+            db.execSQL("INSERT INTO LichThi (TenKyThi, MaMH, NgayThi, GioBatDau, GioKetThuc, MaPhong) VALUES ('Thi Giữa Kỳ 2', 'MH01', '2026-03-10', '07:30', '09:00', 'P101');");
+            db.execSQL("INSERT INTO LichThi (TenKyThi, MaMH, NgayThi, GioBatDau, GioKetThuc, MaPhong) VALUES ('Thi Giữa Kỳ 2', 'MH08', '2026-03-11', '13:30', '15:00', 'P102');");
+            db.execSQL("INSERT INTO LichThi (TenKyThi, MaMH, NgayThi, GioBatDau, GioKetThuc, MaPhong) VALUES ('Thi Cuối Kỳ 2', 'MH02', '2026-05-20', '07:30', '09:30', 'P101');");
 
+            db.execSQL("INSERT INTO PhucKhao (MaHS, MaMH, LyDo, NgayGui, TrangThai) VALUES ('HS002', 'MH02', 'Cộng nhầm điểm tổng trắc nghiệm.', '2026-03-02', 'Đã duyệt');");
+            db.execSQL("INSERT INTO PhucKhao (MaHS, MaMH, LyDo, NgayGui, TrangThai) VALUES ('HS003', 'MH05', 'Em bị thiếu cột điểm chuyên cần.', '2026-03-05', 'Đang chờ xử lý');");
+            db.execSQL("INSERT INTO PhucKhao (MaHS, MaMH, LyDo, NgayGui, TrangThai) VALUES ('HS004', 'MH01', 'Bài thi bị thất lạc khi chấm.', '2026-03-10', 'Từ chối');");
+            db.execSQL("INSERT INTO PhucKhao (MaHS, MaMH, LyDo, NgayGui, TrangThai) VALUES ('HS005', 'MH03', 'Sai sót trong khâu nhập điểm vào hệ thống.', '2026-03-12', 'Đã duyệt');");
+            db.execSQL("INSERT INTO PhucKhao (MaHS, MaMH, LyDo, NgayGui, TrangThai) VALUES ('HS001', 'MH04', 'Muốn kiểm tra lại bài thi cuối kỳ.', '2026-12-25', 'Đang chờ xử lý');");
+            db.execSQL("INSERT INTO PhucKhao (MaHS, MaMH, LyDo, NgayGui, TrangThai) VALUES ('HS008', 'MH02', 'Điểm thi thực hành chưa chính xác.', '2026-03-15', 'Đang chờ xử lý');");
+            db.execSQL("INSERT INTO PhucKhao (MaHS, MaMH, LyDo, NgayGui, TrangThai) VALUES ('HS009', 'MH06', 'Máy chấm trắc nghiệm nhận diện sai mã đề.', '2026-03-18', 'Đã duyệt');");
+            db.execSQL("INSERT INTO PhucKhao (MaHS, MaMH, LyDo, NgayGui, TrangThai) VALUES ('HS010', 'MH07', 'Điểm thành phần chưa được cập nhật.', '2026-04-01', 'Đang chờ xử lý');");
+            db.execSQL("INSERT INTO PhucKhao (MaHS, MaMH, LyDo, NgayGui, TrangThai) VALUES ('HS002', 'MH08', 'Nhầm lẫn tên học sinh cùng lớp.', '2026-04-05', 'Từ chối');");
+            db.execSQL("INSERT INTO PhucKhao (MaHS, MaMH, LyDo, NgayGui, TrangThai) VALUES ('HS012', 'MH01', 'Đề nghị xem lại câu 4 phần tự luận.', '2026-04-10', 'Đang chờ xử lý');");
 
-            db.execSQL("INSERT INTO PhucKhao (MaHS, MaMH, LyDo, NgayGui, TrangThai) VALUES " +
-                    "('HS001', 'MH01', 'Em thấy điểm tự luận bị chấm thiếu.','2026-03-01', 'Đang chờ xử lý');");
-
-
-            db.execSQL("INSERT INTO ThoiKhoaBieu (MaLop, MaMH, MaGV, MaPhong, Thu, TietBatDau, TietKetThuc) VALUES " +
-                    "('10A1', 'MH01', 'GV01', 'P101', 2, 1, 2);");
+            db.execSQL("INSERT INTO ThoiKhoaBieu (MaLop, MaMH, MaGV, MaPhong, Thu, TietBatDau, TietKetThuc) VALUES ('10A1', 'MH02', 'GV02', 'P101', 2, 3, 5);");
+            db.execSQL("INSERT INTO ThoiKhoaBieu (MaLop, MaMH, MaGV, MaPhong, Thu, TietBatDau, TietKetThuc) VALUES ('10A1', 'MH03', 'GV03', 'P102', 3, 1, 2);");
+            db.execSQL("INSERT INTO ThoiKhoaBieu (MaLop, MaMH, MaGV, MaPhong, Thu, TietBatDau, TietKetThuc) VALUES ('10A2', 'MH01', 'GV01', 'P201', 3, 3, 4);");
+            db.execSQL("INSERT INTO ThoiKhoaBieu (MaLop, MaMH, MaGV, MaPhong, Thu, TietBatDau, TietKetThuc) VALUES ('10A2', 'MH04', 'GV04', 'P201', 4, 1, 3);");
+            db.execSQL("INSERT INTO ThoiKhoaBieu (MaLop, MaMH, MaGV, MaPhong, Thu, TietBatDau, TietKetThuc) VALUES ('11A1', 'MH05', 'GV05', 'P201', 4, 6, 8);");
+            db.execSQL("INSERT INTO ThoiKhoaBieu (MaLop, MaMH, MaGV, MaPhong, Thu, TietBatDau, TietKetThuc) VALUES ('11A1', 'MH01', 'GV01', 'P101', 5, 1, 2);");
+            db.execSQL("INSERT INTO ThoiKhoaBieu (MaLop, MaMH, MaGV, MaPhong, Thu, TietBatDau, TietKetThuc) VALUES ('12A1', 'MH06', 'GV06', 'LAB2', 5, 3, 5);");
+            db.execSQL("INSERT INTO ThoiKhoaBieu (MaLop, MaMH, MaGV, MaPhong, Thu, TietBatDau, TietKetThuc) VALUES ('12A1', 'MH07', 'GV07', 'P102', 6, 1, 2);");
+            db.execSQL("INSERT INTO ThoiKhoaBieu (MaLop, MaMH, MaGV, MaPhong, Thu, TietBatDau, TietKetThuc) VALUES ('10A1', 'MH08', 'GV08', 'LAB1', 6, 6, 9);");
+            db.execSQL("INSERT INTO ThoiKhoaBieu (MaLop, MaMH, MaGV, MaPhong, Thu, TietBatDau, TietKetThuc) VALUES ('11A2', 'MH02', 'GV02', 'P101', 7, 2, 4);");
             db.setTransactionSuccessful();
+        } catch (Exception e) {
+            Log.e(TAG, "Loi seed du lieu mau", e);
         } finally {
             db.endTransaction();
         }
+    }
+
+    private static void seedTaiKhoanIfNeeded(SupportSQLiteDatabase db) {
+        db.execSQL("INSERT OR IGNORE INTO TaiKhoan (TenDangNhap, MatKhau, Quyen, MaNguoiDung) VALUES " +
+                "('admin', '123456', 'Admin', 'AD01'), ('gv01', '123456', 'GiaoVien', 'GV01'), ('hs001', '123456', 'HocSinh', 'HS001');");
     }
 }

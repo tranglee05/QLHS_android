@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QuanLyHocSinhMoblie">
         <activity
-            android:name=".ui.dai.LoginActivity"
+            android:name=".utils.LoginActivity"
             android:exported="true"
             android:label="Đăng nhập"
             android:theme="@style/Theme.QuanLyHocSinhMoblie">
@@ -28,6 +28,8 @@
             android:name=".ui.zMainForm.MainForm"
             android:exported="true"
             android:theme="@style/Theme.QuanLyHocSinhMoblie">
+
+
         </activity>
         <activity
             android:name=".ui.tien.DiemActivity"
@@ -102,12 +104,6 @@
             android:theme="@style/Theme.QuanLyHocSinhMoblie">
         </activity>
 
-<!--        <activity-->
-<!--            android:name=".ui.dat.LopActivity"-->
-<!--            android:exported="true"-->
-<!--            android:label="Quản lý lớp học"-->
-<!--            android:theme="@style/Theme.QuanLyHocSinhMoblie">-->
-<!--        </activity>-->
         <activity
             android:name=".ui.dat.GiaoVienActivity"
             android:exported="true"
