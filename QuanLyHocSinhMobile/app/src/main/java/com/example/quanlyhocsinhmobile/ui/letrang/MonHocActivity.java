@@ -64,7 +64,7 @@ public class MonHocActivity extends AppCompatActivity {
         });
     }
 
-    private void setupRecyclerView() {
+    private void setupRecyclerView() {//thiết lập layoutmanager và gán adapter cho recyclerview
         adapter = new MonHocAdapter(new ArrayList<>(), monHoc -> {
             selectedMonHoc = monHoc;
             tvMonHocInfo.setText("Môn học: " + monHoc.getTenMH());
@@ -76,7 +76,7 @@ public class MonHocActivity extends AppCompatActivity {
         rvMonHoc.setAdapter(adapter);
     }
 
-    private void observeViewModel() {
+    private void observeViewModel() {//lắng nghe sự thay đổi củ viewmodel để cập nhật danh sách và thông báo
         viewModel.getAllMonHocs().observe(this, monHocs -> {
             adapter.setList(monHocs);
         });
