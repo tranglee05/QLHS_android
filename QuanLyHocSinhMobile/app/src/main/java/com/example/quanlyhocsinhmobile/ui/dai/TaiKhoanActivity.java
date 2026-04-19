@@ -39,7 +39,6 @@ public class TaiKhoanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dai_activity_taikhoan);
 
-        // Khởi tạo ViewModel
         viewModel = new ViewModelProvider(this).get(TaiKhoanViewModel.class);
 
         initViews();
@@ -48,7 +47,6 @@ public class TaiKhoanActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        // Ánh xạ các View từ layout dai_activity_taikhoan.xml
         etSearch = findViewById(R.id.et_search_tk);
         btnSearch = findViewById(R.id.btn_search_tk);
         rvTaiKhoan = findViewById(R.id.rv_tai_khoan);
@@ -65,27 +63,20 @@ public class TaiKhoanActivity extends AppCompatActivity {
         btnSave = findViewById(R.id.btn_save_tk);
         btnDelete = findViewById(R.id.btn_delete_tk);
         btnRefresh = findViewById(R.id.btn_refresh_tk);
-
-        // Sự kiện Tìm kiếm
         btnSearch.setOnClickListener(v -> viewModel.search(etSearch.getText().toString().trim()));
 
-        // Sự kiện Thêm mới
         btnAdd.setOnClickListener(v -> viewModel.insert(
                 etUsername.getText().toString().trim(),
                 etPassword.getText().toString().trim(),
                 spQuyen.getSelectedItem().toString(),
                 etMaND.getText().toString().trim()
         ));
-
-        // Sự kiện Lưu (Cập nhật mật khẩu, quyền, mã ND)
         btnSave.setOnClickListener(v -> viewModel.update(
                 selectedTaiKhoan,
                 etPassword.getText().toString().trim(),
                 spQuyen.getSelectedItem().toString(),
                 etMaND.getText().toString().trim()
         ));
-
-        // Sự kiện Xóa tài khoản
         btnDelete.setOnClickListener(v -> {
             if (selectedTaiKhoan == null) {
                 Toast.makeText(this, "Vui lòng chọn tài khoản để xóa", Toast.LENGTH_SHORT).show();
@@ -101,8 +92,6 @@ public class TaiKhoanActivity extends AppCompatActivity {
                     .setNegativeButton("HỦY", null)
                     .show();
         });
-
-        // Sự kiện Làm mới danh sách và xóa trắng ô nhập
         btnRefresh.setOnClickListener(v -> {
             viewModel.loadAllTaiKhoans();
             clearInputs();
@@ -122,7 +111,6 @@ public class TaiKhoanActivity extends AppCompatActivity {
 
     private void setupRecyclerView() {
         adapter = new TaiKhoanAdapter(new ArrayList<>(), taiKhoan -> {
-            // Khi click vào 1 dòng trong danh sách
             selectedTaiKhoan = taiKhoan;
             tvInfo.setText("Tài khoản: " + taiKhoan.getTenDangNhap());
 
@@ -143,7 +131,7 @@ public class TaiKhoanActivity extends AppCompatActivity {
             }
             etMaND.setText(taiKhoan.getMaNguoiDung() != null ? taiKhoan.getMaNguoiDung() : "");
 
-            etUsername.setEnabled(false); // Khóa tên đăng nhập vì là Primary Key không được sửa
+            etUsername.setEnabled(false);
         });
 
         rvTaiKhoan.setLayoutManager(new LinearLayoutManager(this));
@@ -151,14 +139,11 @@ public class TaiKhoanActivity extends AppCompatActivity {
     }
 
     private void observeViewModel() {
-        // Quan sát danh sách tài khoản để cập nhật RecyclerView
         viewModel.getAllTaiKhoans().observe(this, list -> {
             if (list != null) {
                 adapter.setList(list);
             }
         });
-
-        // Quan sát các thông báo Toast từ ViewModel (Thành công/Thất bại)
         viewModel.getToastMessage().observe(this, message -> {
             if (message != null) {
                 Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
@@ -176,7 +161,7 @@ public class TaiKhoanActivity extends AppCompatActivity {
         etPassword.setText("");
         spQuyen.setSelection(0);
         etMaND.setText("");
-        etUsername.setEnabled(true); // Mở lại để có thể thêm tài khoản mới
+        etUsername.setEnabled(true);
         etSearch.setText("");
     }
 }

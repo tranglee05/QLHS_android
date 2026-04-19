@@ -53,7 +53,7 @@ public class PhongHocAdapter extends RecyclerView.Adapter<PhongHocAdapter.ViewHo
         if ("Đang sử dụng".equals(tinhTrang)) {
             holder.tvTinhTrang.setTextColor(Color.RED);
         } else {
-            holder.tvTinhTrang.setTextColor(Color.parseColor("#4CAF50")); // Green
+            holder.tvTinhTrang.setTextColor(Color.parseColor("#4CAF50"));
         }
         
         holder.itemView.setOnClickListener(v -> listener.onItemClick(phongHoc));

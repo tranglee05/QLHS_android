@@ -15,13 +15,13 @@ import androidx.room.*;
                 ),
                 @ForeignKey(
                         entity = MonHoc.class,
-                        parentColumns = "MaMH", // 🔥 SỬA CHỖ NÀY
-                        childColumns = "MaMH",  // 🔥 SỬA CHỖ NÀY
+                        parentColumns = "MaMH",
+                        childColumns = "MaMH",
                         onDelete = ForeignKey.SET_NULL,
                         onUpdate = ForeignKey.CASCADE
                 )
         },
-        indices = {@Index("maToHop"), @Index("MaMH")} // 🔥 SỬA CHỖ NÀY
+        indices = {@Index("maToHop"), @Index("MaMH")}
 )
 public class GiaoVien {
 
@@ -40,7 +40,7 @@ public class GiaoVien {
     @ColumnInfo(name = "maToHop")
     private String maToHop;
 
-    @ColumnInfo(name = "MaMH") // 🔥 SỬA CHỖ NÀY
+    @ColumnInfo(name = "MaMH")
     private String maMH;
 
     // ✅ Constructor chuẩn
@@ -51,13 +51,12 @@ public class GiaoVien {
         this.hoTen = hoTen;
         this.ngaySinh = ngaySinh;
         this.sdt = sdt;
-        this.maToHop = maToHop; // 🔥 THÊM
-        this.maMH = maMH;       // 🔥 THÊM
+        this.maToHop = maToHop;
+        this.maMH = maMH;
     }
 
     public GiaoVien() {}
 
-    // Getter & Setter
     public String getMaGV() { return maGV; }
     public void setMaGV(String maGV) { this.maGV = maGV; }
 
@@ -76,16 +75,15 @@ public class GiaoVien {
     public String getMaMH() { return maMH; }
     public void setMaMH(String maMH) { this.maMH = maMH; }
 
-    // ================= DISPLAY =================
     public static class Display {
 
         @Embedded
         public GiaoVien giaoVien;
 
-        @ColumnInfo(name = "TenMH") // 🔥 map từ query
+        @ColumnInfo(name = "TenMH")
         public String tenMH;
 
-        @ColumnInfo(name = "tenToHop") // 🔥 map từ query
+        @ColumnInfo(name = "tenToHop")
         public String tenToHop;
 
         public GiaoVien getGiaoVien() {

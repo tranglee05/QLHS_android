@@ -18,7 +18,6 @@ public interface MonHocDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(MonHoc monHoc);
-
     @Update
     void update(MonHoc monHoc);
 
@@ -27,10 +26,8 @@ public interface MonHocDAO {
 
     @Query("SELECT COUNT(*) FROM monhoc WHERE MaMH = :maMH")
     int checkMaMonHoc(String maMH);
-
     @Query("SELECT COUNT(*) FROM monhoc WHERE TenMH = :tenMH")
     int checkTenMonHoc(String tenMH);
-
     @Query("SELECT * FROM monhoc WHERE MaMH LIKE '%' || :query || '%' OR TenMH LIKE '%' || :query || '%'")
     List<MonHoc> search(String query);
 }

@@ -63,15 +63,10 @@ public class PhucKhaoActivity extends AppCompatActivity {
         }
         
         if ("HocSinh".equals(quyen)) {
-            // Học sinh không được sửa mã HS của chính mình
             binding.spinnerMahsPk.setEnabled(false);
-            // Ẩn nút Xóa và Sửa (chỉ cho phép Thêm yêu cầu mới)
             binding.btnDeletePk.setVisibility(View.GONE);
             binding.btnUpdatePk.setVisibility(View.GONE);
-            // Ẩn chọn trạng thái khi thêm (mặc định là Đang chờ)
             binding.spinnerTrangthaiPk.setVisibility(View.GONE);
-            
-            // Chỉ thấy yêu cầu phúc khảo của chính mình
             String maHS = phanQuyen.getMaNguoiDung();
             if (maHS != null) {
                 viewModel.filter(maHS, "", "");
@@ -102,8 +97,6 @@ public class PhucKhaoActivity extends AppCompatActivity {
             for (HocSinh hs : hsList) listMaHS.add(hs.getMaHS());
             binding.spinnerMahsPk.setAdapter(new ArrayAdapter<>(this, R.layout.spinner_item, listMaHS));
             binding.spinnerLocMahs.setAdapter(new ArrayAdapter<>(this, R.layout.spinner_item, listMaHS));
-            
-            // Nếu là học sinh, tự động chọn mã HS của mình
             if ("HocSinh".equals(phanQuyen.getQuyen())) {
                 String maHS = phanQuyen.getMaNguoiDung();
                 int pos = listMaHS.indexOf(maHS);

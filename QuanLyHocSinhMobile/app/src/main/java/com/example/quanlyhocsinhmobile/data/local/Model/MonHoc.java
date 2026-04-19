@@ -20,7 +20,6 @@ public class MonHoc {
     private String tenMH;
 
     public MonHoc() {}
-
     @Ignore
     public MonHoc(String maMH, String tenMH) {
         this.maMH = maMH;
@@ -45,7 +44,6 @@ public class MonHoc {
 
     @Override
     public String toString() {
-        // Hien thi day du ma + ten mon trong combobox
         return maMH + " - " + (tenMH != null ? tenMH : "");
     }
 }

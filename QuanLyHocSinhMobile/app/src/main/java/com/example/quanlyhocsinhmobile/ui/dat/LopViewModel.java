@@ -18,7 +18,6 @@ public class LopViewModel extends AndroidViewModel {
     private final LopRepository repository;
     private final MutableLiveData<List<Lop.Display>> allLop = new MutableLiveData<>();
     private final MutableLiveData<String> toastMessage = new MutableLiveData<>();
-    // ✅ Thêm LiveData cho Spinner
     private final MutableLiveData<List<String>> nienKhoaList = new MutableLiveData<>();
     private final MutableLiveData<List<com.example.quanlyhocsinhmobile.data.local.DAO.LopDAO.GiaoVienInfo>> giaoVienList = new MutableLiveData<>();
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -36,7 +35,6 @@ public class LopViewModel extends AndroidViewModel {
         return toastMessage;
     }
 
-    // ✅ Getter cho Niên khóa & Giáo viên
     public LiveData<List<String>> getNienKhoaList() {
         return nienKhoaList;
     }
@@ -45,13 +43,11 @@ public class LopViewModel extends AndroidViewModel {
         return giaoVienList;
     }
 
-    // ✅ Load dữ liệu cho Spinner
     public void loadSpinnerData() {
         executor.execute(() -> {
             List<String> nienKhoas = repository.getAllNienKhoa();
             List<com.example.quanlyhocsinhmobile.data.local.DAO.LopDAO.GiaoVienInfo> giaoViens = repository.getAllGiaoVienForLop();
 
-            // Thêm tùy chọn mặc định
             if (nienKhoas != null && nienKhoas.isEmpty()) {
                 nienKhoas.add(0, "-- Chọn niên khóa --");
             }
@@ -89,39 +85,33 @@ public class LopViewModel extends AndroidViewModel {
 
         executor.execute(() -> {
 
-            // Check mã lớp
             if (repository.checkMaLop(maLop) > 0) {
                 toastMessage.postValue("Mã lớp đã tồn tại!");
                 return;
             }
 
-            // Check tên lớp
             if (repository.checkTenLop(tenLop) > 0) {
                 toastMessage.postValue("Tên lớp đã tồn tại!");
                 return;
             }
 
-            // Check giáo viên tồn tại
             if (repository.checkGiaoVienTonTai(maGVCN) == 0) {
                 toastMessage.postValue("Giáo viên chủ nhiệm không tồn tại!");
                 return;
             }
 
-            // Check giáo viên đã làm GVCN chưa
             if (repository.checkGVCNDaPhanCong(maGVCN) > 0) {
                 toastMessage.postValue("Giáo viên này đã là GVCN lớp khác!");
                 return;
             }
 
-            // Check niên khóa hợp lệ (optional)
             if (!nienKhoa.matches("\\d{4}-\\d{4}")) {
                 toastMessage.postValue("Niên khóa phải dạng yyyy-yyyy (VD: 2024-2025)");
                 return;
             }
 
-            // Constructor Lop nhận thứ tự: (maLop, tenLop, maGVCN, nienKhoa)
             Lop lop = new Lop(maLop, tenLop, maGVCN, nienKhoa);
-            repository.insertAndWait(lop); // Đợi insert xong rồi mới load
+            repository.insertAndWait(lop); 
 
             toastMessage.postValue("Thêm lớp thành công");
             loadAllLops();
@@ -141,38 +131,33 @@ public class LopViewModel extends AndroidViewModel {
 
         executor.execute(() -> {
 
-            // Check trùng tên lớp (trừ chính nó)
             if (!selectedLop.getTenLop().equals(tenLop)
                     && repository.checkTenLop(tenLop) > 0) {
                 toastMessage.postValue("Tên lớp đã tồn tại!");
                 return;
             }
 
-            // Check giáo viên tồn tại
             if (repository.checkGiaoVienTonTai(maGVCN) == 0) {
                 toastMessage.postValue("Giáo viên chủ nhiệm không tồn tại!");
                 return;
             }
 
-            // Check GVCN đã chủ nhiệm lớp khác chưa (trừ chính lớp đang sửa)
             if (!selectedLop.getMaGVCN().equals(maGVCN)
                     && repository.checkGVCNDaPhanCong(maGVCN) > 0) {
                 toastMessage.postValue("Giáo viên này đã là GVCN lớp khác!");
                 return;
             }
 
-            // Check định dạng niên khóa
             if (!nienKhoa.matches("\\d{4}-\\d{4}")) {
                 toastMessage.postValue("Niên khóa phải dạng yyyy-yyyy (VD: 2024-2025)");
                 return;
             }
 
-            // Update dữ liệu
             selectedLop.setTenLop(tenLop);
             selectedLop.setMaGVCN(maGVCN);
             selectedLop.setNienKhoa(nienKhoa);
 
-            repository.updateAndWait(selectedLop); // Đợi update xong rồi mới load
+            repository.updateAndWait(selectedLop); 
 
             toastMessage.postValue("Cập nhật lớp thành công");
             loadAllLops();
@@ -185,7 +170,7 @@ public class LopViewModel extends AndroidViewModel {
         }
 
         executor.execute(() -> {
-            repository.deleteAndWait(selectedLop); // Đợi delete xong rồi mới load
+            repository.deleteAndWait(selectedLop);
 
             toastMessage.postValue("Xóa lớp thành công");
             loadAllLops();

@@ -33,7 +33,6 @@ public class PhanQuyen {
         editor.putBoolean(khoadadanhnhap, true);
         editor.apply();
     }
-
     public String getTenDangNhap() {
         return sharedPreferences.getString(khoatendn, "");
     }

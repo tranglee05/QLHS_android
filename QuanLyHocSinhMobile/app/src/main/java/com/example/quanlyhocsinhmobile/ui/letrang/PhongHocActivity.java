@@ -111,7 +111,7 @@ public class PhongHocActivity extends AppCompatActivity {
 
         ArrayAdapter<String> updateAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, loaiPhongArray);
         spinnerLoaiPhong.setAdapter(updateAdapter);
-    }
+    }//cd dl cho thanh lọc
 
     private void observeViewModel() {
         viewModel.getFilteredPhongHocs().observe(this, phongHocs -> {
@@ -127,7 +127,6 @@ public class PhongHocActivity extends AppCompatActivity {
             }
         });
     }
-
     private void clearInputs() {
         selectedPhongHoc = null;
         tvPhongInfo.setText("Phòng học: --");

@@ -56,7 +56,6 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
             return;
         }
-
         executorService.execute(() -> {
             TaiKhoan user = taiKhoanDAO.login(username, password);
 

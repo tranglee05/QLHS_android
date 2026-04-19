@@ -14,7 +14,6 @@ import com.example.quanlyhocsinhmobile.data.local.Model.MonHoc;
 import java.util.List;
 
 public class MonHocAdapter extends RecyclerView.Adapter<MonHocAdapter.ViewHolder> {
-
     private List<MonHoc> list;
     private OnItemClickListener listener;
 
@@ -29,7 +28,7 @@ public class MonHocAdapter extends RecyclerView.Adapter<MonHocAdapter.ViewHolder
 
     public void setList(List<MonHoc> list) {
         this.list = list;
-        notifyDataSetChanged();//yu cầu vẽ lại giao diện
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -40,7 +39,7 @@ public class MonHocAdapter extends RecyclerView.Adapter<MonHocAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {// đổ dữ liệu vào text view
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         MonHoc monHoc = list.get(position);
         holder.tvMaMon.setText(monHoc.getMaMH());
         holder.tvTenMon.setText(monHoc.getTenMH());
@@ -49,7 +48,7 @@ public class MonHocAdapter extends RecyclerView.Adapter<MonHocAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return list != null ? list.size() : 0;} //trả về tổng số lương môn học có trong danh sách
+        return list != null ? list.size() : 0;}
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvMaMon, tvTenMon;

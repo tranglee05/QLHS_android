@@ -40,17 +40,14 @@ public class ThongBaoActivity extends AppCompatActivity {
     private void apDungPhanQuyen() {
         String quyen = phanQuyen.getQuyen();
         if ("GiaoVien".equals(quyen) || "HocSinh".equals(quyen)) {
-            // Đổi tiêu đề: "THÔNG BÁO"
             if (binding.tvTitleThongbao != null) {
                 binding.tvTitleThongbao.setText("THÔNG BÁO");
             }
-            // Ẩn phần 3: THÊM THÔNG BÁO
             if (binding.tvAddTitle != null) binding.tvAddTitle.setVisibility(View.GONE);
             if (binding.cardAdd != null) binding.cardAdd.setVisibility(View.GONE);
         }
 
         if ("HocSinh".equals(quyen)) {
-            // Ẩn phần THÊM THÔNG BÁO cho học sinh
             if (binding.tvAddTitle != null) binding.tvAddTitle.setVisibility(View.GONE);
             if (binding.cardAdd != null) binding.cardAdd.setVisibility(View.GONE);
         }

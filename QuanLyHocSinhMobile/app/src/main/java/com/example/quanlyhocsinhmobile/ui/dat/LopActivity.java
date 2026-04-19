@@ -37,7 +37,6 @@ public class LopActivity extends AppCompatActivity {
     private Lop selectedLop = null;
     private String selectedTenGVCN = null;
 
-    // ✅ Adapter cho Spinner
     private ArrayAdapter<String> nienKhoaAdapter;
     private ArrayAdapter<LopDAO.GiaoVienInfo> giaoVienAdapter;
     private final List<LopDAO.GiaoVienInfo> baseGiaoVienOptions = new ArrayList<>();
@@ -51,7 +50,6 @@ public class LopActivity extends AppCompatActivity {
         initViews();
         setupRecyclerView();
         observeViewModel();
-        // ✅ Load dữ liệu cho Spinner
         viewModel.loadSpinnerData();
     }
     private void initViews() {
@@ -65,7 +63,6 @@ public class LopActivity extends AppCompatActivity {
         et_ma_lop = findViewById(R.id.et_ma_lop);
         et_ten_lop = findViewById(R.id.et_ten_lop);
 
-        // ✅ Thay EditText bằng Spinner
         sp_giao_vien = findViewById(R.id.sp_giao_vien);
         sp_nien_khoa = findViewById(R.id.sp_nien_khoa);
 
@@ -74,7 +71,6 @@ public class LopActivity extends AppCompatActivity {
         btnDelete = findViewById(R.id.btn_delete);
         btnRefresh = findViewById(R.id.btn_refresh);
 
-        // ✅ Init Adapter cho Spinner
         nienKhoaAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, new ArrayList<>());
         nienKhoaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_nien_khoa.setAdapter(nienKhoaAdapter);
@@ -83,17 +79,14 @@ public class LopActivity extends AppCompatActivity {
         giaoVienAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_giao_vien.setAdapter(giaoVienAdapter);
 
-        // 🔍 SEARCH
         btnSearch.setOnClickListener(v ->
                 viewModel.search(etSearch.getText().toString().trim())
         );
 
-        // ➕ ADD
         btnAdd.setOnClickListener(v -> {
             String ma = et_ma_lop.getText().toString().trim();
             String ten = et_ten_lop.getText().toString().trim();
 
-            // ✅ Lấy giá trị từ Spinner
             String nienKhoa = (String) sp_nien_khoa.getSelectedItem();
             LopDAO.GiaoVienInfo selectedGV = (LopDAO.GiaoVienInfo) sp_giao_vien.getSelectedItem();
             String maGVCN = selectedGV != null ? selectedGV.maGV : "";
@@ -107,7 +100,6 @@ public class LopActivity extends AppCompatActivity {
             viewModel.insert(ma, ten, maGVCN, nienKhoa);
         });
 
-        // ✏️ UPDATE
         btnSave.setOnClickListener(v -> {
             if (selectedLop == null) {
                 Toast.makeText(this, "Chưa chọn lớp", Toast.LENGTH_SHORT).show();
@@ -116,7 +108,6 @@ public class LopActivity extends AppCompatActivity {
 
             String ten = et_ten_lop.getText().toString().trim();
 
-            // ✅ Lấy giá trị từ Spinner
             String nienKhoa = (String) sp_nien_khoa.getSelectedItem();
             LopDAO.GiaoVienInfo selectedGV = (LopDAO.GiaoVienInfo) sp_giao_vien.getSelectedItem();
             String maGVCN = selectedGV != null ? selectedGV.maGV : "";
@@ -162,7 +153,6 @@ public class LopActivity extends AppCompatActivity {
 
             et_ma_lop.setEnabled(false);
 
-            // ✅ Tự cuộn xuống phần thông tin lớp học sau khi chọn dòng
             if (nsvLopContent != null) {
                 nsvLopContent.post(() -> nsvLopContent.smoothScrollTo(0, tv_lop_hoc_info.getTop()));
             }
@@ -197,8 +187,6 @@ public class LopActivity extends AppCompatActivity {
             }
         }
 
-        // Nếu lớp đang chọn có GVCN đã bị lọc khỏi danh sách "chưa chủ nhiệm",
-        // thêm tạm duy nhất 1 item sau khi đã reset từ danh sách gốc.
         if (!foundGVCN && selectedLop.getMaGVCN() != null && !selectedLop.getMaGVCN().isEmpty()) {
             String tenHienThi = (selectedTenGVCN == null || selectedTenGVCN.trim().isEmpty())
                     ? selectedLop.getMaGVCN()
@@ -224,7 +212,6 @@ public class LopActivity extends AppCompatActivity {
             }
         });
 
-        // ✅ Observer dữ liệu Spinner
         viewModel.getNienKhoaList().observe(this, nienKhoas -> {
             if (nienKhoas != null) {
                 nienKhoaAdapter.clear();
@@ -248,7 +235,6 @@ public class LopActivity extends AppCompatActivity {
         et_ma_lop.setText("");
         et_ten_lop.setText("");
 
-        // ✅ Reset Spinner
         rebuildGiaoVienSpinnerFromBase();
         if (sp_giao_vien.getCount() > 0) {
             sp_giao_vien.setSelection(0);

@@ -33,8 +33,6 @@ public interface ToBoMonDAO {
     @Query("SELECT COUNT(*) FROM ToHopMon  WHERE TenToHop = :tenToHop")
     int checkTenToHop(String tenToHop);
 
-
-    // sua lai
     @Query("SELECT * FROM ToHopMon " +
             "WHERE MaToHop LIKE '%' || :query || '%' " +
             "OR TenToHop LIKE '%' || :query || '%' ")

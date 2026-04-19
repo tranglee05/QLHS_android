@@ -64,19 +64,13 @@ public class HocSinhActivity extends AppCompatActivity {
         }
         
         if ("HocSinh".equals(phanQuyen.getQuyen())) {
-            // Học sinh ẩn nút thêm và xóa
             if (btnAdd != null) btnAdd.setVisibility(View.GONE);
             if (btnDelete != null) btnDelete.setVisibility(View.GONE);
-            
-            // Không được sửa mã lớp và mã đối tượng
             if (spLop != null) spLop.setEnabled(false);
             if (spDT != null) spDT.setEnabled(false);
-            
-            // Chỉ thấy hồ sơ của chính mình
             String maHS = phanQuyen.getMaNguoiDung();
             if (maHS != null) {
                 vm.search(maHS);
-                // Ẩn tìm kiếm
                 if (etSearch != null) etSearch.setVisibility(View.GONE);
                 if (btnSearch != null) btnSearch.setVisibility(View.GONE);
             }
@@ -119,13 +113,11 @@ public class HocSinhActivity extends AppCompatActivity {
                     c.get(Calendar.MONTH),
                     1
             );
-
-            // 👉 GIỚI HẠN NĂM: 2008 - 2010
             Calendar minDate = Calendar.getInstance();
-            minDate.set(2008, 0, 1); // 01/01/2008
+            minDate.set(2008, 0, 1);
 
             Calendar maxDate = Calendar.getInstance();
-            maxDate.set(2010, 11, 31); // 31/12/2010
+            maxDate.set(2010, 11, 31);
 
             dialog.getDatePicker().setMinDate(minDate.getTimeInMillis());
             dialog.getDatePicker().setMaxDate(maxDate.getTimeInMillis());
@@ -133,7 +125,6 @@ public class HocSinhActivity extends AppCompatActivity {
             dialog.show();
         });
 
-        // ===== BUTTON EVENTS =====
         btnAdd.setOnClickListener(v -> {
             if (validateInput()) {
                 vm.insert(getData());
@@ -172,8 +163,6 @@ public class HocSinhActivity extends AppCompatActivity {
             clearForm();
         });
     }
-
-    // ================= RECYCLER VIEW =================
     private void setupRecyclerView() {
         adapter = new HocSinhAdapter(new ArrayList<>(), hs -> {
             selected = hs;
@@ -198,8 +187,6 @@ public class HocSinhActivity extends AppCompatActivity {
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(adapter);
     }
-
-    // ================= OBSERVE =================
     private void observeViewModel() {
         vm.getList().observe(this, adapter::setList);
 
@@ -212,8 +199,6 @@ public class HocSinhActivity extends AppCompatActivity {
             }
         });
     }
-
-    // ================= LOAD SPINNER =================
     private void loadSpinner() {
         new Thread(() -> {
             listLop = AppDatabase.getDatabase(this).lopDAO().getAllMaLop();
@@ -232,8 +217,6 @@ public class HocSinhActivity extends AppCompatActivity {
             });
         }).start();
     }
-
-    // ================= GET DATA =================
     private HocSinh getData() {
         HocSinh hs = new HocSinh();
 
@@ -247,8 +230,6 @@ public class HocSinhActivity extends AppCompatActivity {
 
         return hs;
     }
-
-    // ================= VALIDATE =================
     private boolean validateInput() {
 
         if (ma.getText().toString().trim().isEmpty()) {

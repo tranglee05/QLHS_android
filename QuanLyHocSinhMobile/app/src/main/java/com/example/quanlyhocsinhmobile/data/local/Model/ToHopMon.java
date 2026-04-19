@@ -30,7 +30,6 @@ public class ToHopMon {
 
     @Override
     public String toString() {
-        // Hien thi day du ma + ten to hop trong combobox
         return maToHop + " - " + tenToHop;
     }
 }

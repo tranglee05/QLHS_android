@@ -9,7 +9,7 @@ public class ThongBao {
     private int maTB;
     private String tieuDe;
     private String noiDung;
-    private String ngayTao; // SQLite DEFAULT CURRENT_DATE handling is usually done at insertion or via Room's defaultValue
+    private String ngayTao;
     private String nguoiGui;
 
     public ThongBao() {}

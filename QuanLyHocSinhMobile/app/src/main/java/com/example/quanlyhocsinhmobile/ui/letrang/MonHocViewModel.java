@@ -29,9 +29,11 @@ public class MonHocViewModel extends AndroidViewModel {
         return allMonHocs;
     }
 
+
     public LiveData<String> getToastMessage() {
         return toastMessage;
     }
+
 
     public void loadAllMonHocs() {
         executor.execute(() -> {

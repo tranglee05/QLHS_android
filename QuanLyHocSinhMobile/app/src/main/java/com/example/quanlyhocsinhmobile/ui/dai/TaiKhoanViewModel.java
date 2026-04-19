@@ -39,8 +39,6 @@ public class TaiKhoanViewModel extends AndroidViewModel {
     public LiveData<TaiKhoan> getLoginResult() {
         return loginResult;
     }
-
-    // ================= LOAD =================
     public void loadAllTaiKhoans() {
         executor.execute(() -> {
             List<TaiKhoan> list = repository.getAllTaiKhoan();
@@ -58,16 +56,12 @@ public class TaiKhoanViewModel extends AndroidViewModel {
             });
         }
     }
-
-    // ================= INSERT =================
     public void insert(String user, String pass, String quyen, String maND) {
 
         if (user.isEmpty() || pass.isEmpty() || quyen.isEmpty()) {
             toastMessage.setValue("Tên đăng nhập, mật khẩu và quyền không được để trống");
             return;
         }
-
-        // validate theo quyền
         if (!quyen.equals("admin") && (maND == null || maND.isEmpty())) {
             toastMessage.setValue("Vui lòng chọn mã người dùng");
             return;
@@ -84,8 +78,6 @@ public class TaiKhoanViewModel extends AndroidViewModel {
             tk.setTenDangNhap(user);
             tk.setMatKhau(pass);
             tk.setQuyen(quyen);
-
-            // admin thì không cần mã
             if (quyen.equals("admin")) {
                 tk.setMaNguoiDung(null);
             } else {
@@ -97,8 +89,6 @@ public class TaiKhoanViewModel extends AndroidViewModel {
             loadAllTaiKhoans();
         });
     }
-
-    // ================= UPDATE =================
     public void update(TaiKhoan selectedTK, String pass, String quyen, String maND) {
 
         if (selectedTK == null) {
@@ -132,8 +122,6 @@ public class TaiKhoanViewModel extends AndroidViewModel {
             loadAllTaiKhoans();
         });
     }
-
-    // ================= DELETE =================
     public void delete(TaiKhoan selectedTK) {
         if (selectedTK == null) {
             toastMessage.setValue("Vui lòng chọn tài khoản để xóa");
@@ -146,8 +134,6 @@ public class TaiKhoanViewModel extends AndroidViewModel {
             loadAllTaiKhoans();
         });
     }
-
-    // ================= LOGIN =================
     public void login(String user, String pass) {
 
         if (user.isEmpty() || pass.isEmpty()) {
@@ -167,10 +153,6 @@ public class TaiKhoanViewModel extends AndroidViewModel {
             }
         });
     }
-
-    // ================= SPINNER DATA =================
-
-    // 🔥 thêm 2 hàm này để dùng cho spinner phụ
     public List<String> getAllMaGiaoVien() {
         return repository.getAllMaGV();
     }

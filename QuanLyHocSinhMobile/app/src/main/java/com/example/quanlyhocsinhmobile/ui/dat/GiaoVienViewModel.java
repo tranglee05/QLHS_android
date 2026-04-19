@@ -40,13 +40,10 @@ public class GiaoVienViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<ToHopMon>> getToBoMonList(){ return toHopMonList;}
-
-    // Alias đúng tên để Activity gọi không lỗi compile
     public LiveData<List<ToHopMon>> getToHopMonList() {
         return toHopMonList;
     }
 
-    // ✅ Load dữ liệu cho Spinner
     public void loadSpinnerData() {
         executor.execute(() -> {
             List<ToHopMon> toHops = repository.getAllToHop();
@@ -113,11 +110,10 @@ public class GiaoVienViewModel extends AndroidViewModel {
             return;
         }
 
-        // ✅ Auto-generate mã GV
         executor.execute(() -> {
             String nextMaGV = repository.getNextMaGV();
             insert(
-                    nextMaGV,  // Sử dụng mã tự động
+                    nextMaGV,
                     giaoVien.getHoTen(),
                     giaoVien.getNgaySinh(),
                     giaoVien.getSdt(),
@@ -161,7 +157,7 @@ public class GiaoVienViewModel extends AndroidViewModel {
         }
 
         executor.execute(() -> {
-            repository.updateAndWait(giaoVien); // Đợi update xong rồi mới load
+            repository.updateAndWait(giaoVien);
             toastMessage.postValue("Cập nhật thành công");
             loadAllGiaoViens();
         });
@@ -174,7 +170,7 @@ public class GiaoVienViewModel extends AndroidViewModel {
         }
 
         executor.execute(() -> {
-            repository.deleteAndWait(selectedGiaoVien); // Đợi delete xong rồi mới load
+            repository.deleteAndWait(selectedGiaoVien);
             toastMessage.postValue("Xóa giáo viên thành công");
             loadAllGiaoViens();
         });

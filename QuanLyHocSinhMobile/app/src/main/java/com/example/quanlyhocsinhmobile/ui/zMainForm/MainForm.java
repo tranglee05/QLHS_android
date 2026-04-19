@@ -67,7 +67,6 @@ public class MainForm extends AppCompatActivity {
     }
 
     private void setupButtons() {
-        // Group 1
         findViewById(R.id.btn_lop_hoc).setOnClickListener(v -> {
             navigateTo(LopActivity.class, "Lớp học");
         });
@@ -77,8 +76,6 @@ public class MainForm extends AppCompatActivity {
         findViewById(R.id.btn_to_bo_mon).setOnClickListener(v -> {
             navigateTo(ToBoMonActivity.class, "Tổ bộ môn");
         });
-
-        // Group 2
         findViewById(R.id.btn_mon_hoc).setOnClickListener(v -> {
             navigateTo(MonHocActivity.class, "Môn học");
         });
@@ -88,8 +85,6 @@ public class MainForm extends AppCompatActivity {
         findViewById(R.id.btn_thiet_bi).setOnClickListener(v -> {
             navigateTo(PhongHocActivity.class, "Phòng học");
         });
-
-        // Group 3
         findViewById(R.id.btn_diem_so).setOnClickListener(v -> {
             navigateTo(com.example.quanlyhocsinhmobile.ui.tien.DiemActivity.class, "Điểm số");
         });
@@ -99,8 +94,6 @@ public class MainForm extends AppCompatActivity {
         findViewById(R.id.btn_lich_thi).setOnClickListener(v -> {
             navigateTo(com.example.quanlyhocsinhmobile.ui.tien.LichThiActivity.class, "Lịch thi");
         });
-
-        // Group 4
         findViewById(R.id.btn_hoc_phi).setOnClickListener(v -> {
             navigateTo(com.example.quanlyhocsinhmobile.ui.hatrang.HocPhiActivity.class, "Học phí");
         });
@@ -110,8 +103,6 @@ public class MainForm extends AppCompatActivity {
         findViewById(R.id.btn_phuc_khao).setOnClickListener(v -> {
             navigateTo(com.example.quanlyhocsinhmobile.ui.hatrang.PhucKhaoActivity.class, "Phúc khảo");
         });
-
-        // Group 5
         findViewById(R.id.btn_ho_so_hs).setOnClickListener(v -> {
             navigateTo(com.example.quanlyhocsinhmobile.ui.dai.HocSinhActivity.class, "Hồ sơ học sinh");
         });

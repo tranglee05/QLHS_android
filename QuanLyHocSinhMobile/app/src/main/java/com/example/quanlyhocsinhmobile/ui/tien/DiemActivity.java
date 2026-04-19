@@ -50,18 +50,12 @@ public class DiemActivity extends AppCompatActivity {
     private void apDungPhanQuyen() {
         String quyen = phanQuyen.getQuyen();
         if ("HocSinh".equals(quyen)) {
-            // Đổi tiêu đề cho học sinh
             binding.tvTitleDiem.setText("ĐIỂM SỐ");
-
-            // Ẩn phần cập nhật điểm
             binding.tvUpdateTitle.setVisibility(View.GONE);
             binding.cardUpdateScore.setVisibility(View.GONE);
-            
-            // Tự động load điểm của chính học sinh đó
             String maHS = phanQuyen.getMaNguoiDung();
             if (maHS != null && !maHS.isEmpty()) {
                 viewModel.search(maHS);
-                // Ẩn thanh tìm kiếm và bộ lọc để học sinh chỉ thấy điểm của mình
                 binding.cardSearch.setVisibility(View.GONE);
                 binding.tvSearchTitle.setVisibility(View.GONE);
             }

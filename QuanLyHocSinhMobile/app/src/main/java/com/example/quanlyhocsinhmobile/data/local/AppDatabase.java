@@ -20,8 +20,6 @@ import java.util.concurrent.Executors;
     HocPhi.class, ThongBao.class, PhucKhao.class
 }, version = 18, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
-
-    // --- 1. Khai báo các DAO ---
     public abstract DiemDAO diemDAO();
     public abstract HocSinhDAO hocSinhDAO();
     public abstract MonHocDAO monHocDAO();
@@ -38,8 +36,6 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract PhucKhaoDAO phucKhaoDAO();
     public abstract DoiTuongDAO doiTuongDAO();
     public abstract TaiKhoanDAO taiKhoanDAO();
-
-    // Singleton & Executor
     private static volatile AppDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
     public static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);

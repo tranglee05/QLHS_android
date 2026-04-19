@@ -14,7 +14,6 @@ import java.util.List;
 @Dao
 public interface ThongBaoDAO {
 
-    // Lấy tất cả thông báo
     @Query("SELECT * FROM ThongBao ORDER BY maTB ASC")
     List<ThongBao> getAll();
 
@@ -27,7 +26,6 @@ public interface ThongBaoDAO {
     @Delete
     void delete(ThongBao thongBao);
 
-    // Tìm kiếm (theo tiêu đề + nội dung + người gửi)
     @Query("SELECT * FROM ThongBao " +
             "WHERE tieuDe LIKE :search " +
             "OR noiDung LIKE :search " +
@@ -35,13 +33,11 @@ public interface ThongBaoDAO {
             "ORDER BY maTB ")
     List<ThongBao> searchThongBao(String search);
 
-    // Lọc theo người gửi
     @Query("SELECT * FROM ThongBao " +
             "WHERE (:nguoiGui = '' OR nguoiGui = :nguoiGui) " +
             "ORDER BY maTB ")
     List<ThongBao> filterThongBao(String nguoiGui);
 
-    // Lọc + tìm kiếm (giống filter + search học phí)
     @Query("SELECT * FROM ThongBao " +
             "WHERE (:search = '' OR tieuDe LIKE :search OR noiDung LIKE :search) " +
             "AND (:nguoiGui = '' OR nguoiGui = :nguoiGui) " +

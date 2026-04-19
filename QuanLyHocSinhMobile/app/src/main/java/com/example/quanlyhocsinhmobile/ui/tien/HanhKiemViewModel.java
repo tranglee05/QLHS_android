@@ -51,7 +51,6 @@ public class HanhKiemViewModel extends AndroidViewModel {
     public void update(HanhKiem hanhKiem) {
         executorService.execute(() -> {
             repository.updateHanhKiem(hanhKiem);
-            // After update, we might want to refresh the current list or the UI will handle it
         });
     }
 }

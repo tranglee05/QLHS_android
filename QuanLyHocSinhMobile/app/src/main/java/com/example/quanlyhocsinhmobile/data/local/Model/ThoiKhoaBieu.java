@@ -53,6 +53,7 @@ public class ThoiKhoaBieu {
 
     public static class Display {
         @Embedded
+        @PrimaryKey
         private ThoiKhoaBieu thoiKhoaBieu;
         private String tenLop;
         private String tenMH;

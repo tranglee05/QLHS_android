@@ -30,8 +30,6 @@ public class LopRepository {
     public void insert(Lop lop) {
         AppDatabase.databaseWriteExecutor.execute(() -> lopDAO.insert(lop));
     }
-
-    // Đợi insert hoàn thành trước khi trở lại
     public void insertAndWait(Lop lop) {
         CountDownLatch latch = new CountDownLatch(1);
         AppDatabase.databaseWriteExecutor.execute(() -> {
@@ -51,8 +49,6 @@ public class LopRepository {
     public void update(Lop lop){
         AppDatabase.databaseWriteExecutor.execute(() -> lopDAO.update(lop));
     }
-
-    // Đợi update hoàn thành trước khi trở lại
     public void updateAndWait(Lop lop) {
         CountDownLatch latch = new CountDownLatch(1);
         AppDatabase.databaseWriteExecutor.execute(() -> {
@@ -72,8 +68,6 @@ public class LopRepository {
     public void delete(Lop lop){
         AppDatabase.databaseWriteExecutor.execute(() -> lopDAO.delete(lop));
     }
-
-    // Đợi delete hoàn thành trước khi trở lại
     public void deleteAndWait(Lop lop) {
         CountDownLatch latch = new CountDownLatch(1);
         AppDatabase.databaseWriteExecutor.execute(() -> {
@@ -108,13 +102,10 @@ public class LopRepository {
     public int checkGVCNDaPhanCong(String maGV) {
         return lopDAO.checkGVCNDaPhanCong(maGV);
     }
-
-    // ✅ Lấy danh sách niên khóa từ DB
     public List<String> getAllNienKhoa() {
         return lopDAO.getAllNienKhoa();
     }
 
-    // ✅ Lấy danh sách giáo viên từ DB
     public List<LopDAO.GiaoVienInfo> getAllGiaoVienForLop() {
         return lopDAO.getAllGiaoVienForLop();
     }

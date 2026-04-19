@@ -62,11 +62,8 @@ public class TKBActivity extends AppCompatActivity {
 
     private void apDungPhanQuyen() {
         if ("GiaoVien".equals(phanQuyen.getQuyen()) || "HocSinh".equals(phanQuyen.getQuyen())) {
-            // Chỉ ẩn tiêu đề và phần Form nhập liệu, giữ lại Card để hiện nút Làm mới/Excel
             if (tvUpdateTitle != null) tvUpdateTitle.setVisibility(View.GONE);
             if (layoutTkbForm != null) layoutTkbForm.setVisibility(View.GONE);
-            
-            // Đảm bảo Card vẫn hiện để chứa các nút chức năng chung
             if (cardUpdate != null) cardUpdate.setVisibility(View.VISIBLE);
         }
         

@@ -26,14 +26,11 @@ public class ExcelHelper {
 
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet(sheetName);
-
-        // Header
         Row headerRow = sheet.createRow(0);
         for (int i = 0; i < headers.length; i++) {
             headerRow.createCell(i).setCellValue(headers[i]);
         }
 
-        // Data
         for (int i = 0; i < data.size(); i++) {
             Row row = sheet.createRow(i + 1);
             rowMapper.accept(row, data.get(i));

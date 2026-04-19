@@ -32,6 +32,7 @@ public class MonHocActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.letrang_activity_monhoc);
 
@@ -64,19 +65,19 @@ public class MonHocActivity extends AppCompatActivity {
         });
     }
 
-    private void setupRecyclerView() {//thiết lập layoutmanager và gán adapter cho recyclerview
+    private void setupRecyclerView() {
         adapter = new MonHocAdapter(new ArrayList<>(), monHoc -> {
             selectedMonHoc = monHoc;
             tvMonHocInfo.setText("Môn học: " + monHoc.getTenMH());
             etMaMon.setText(monHoc.getMaMH());
             etTenMon.setText(monHoc.getTenMH());
-            etMaMon.setEnabled(false); // Không cho sửa mã môn khi đang chọn
+            etMaMon.setEnabled(false);
         });
         rvMonHoc.setLayoutManager(new LinearLayoutManager(this));
         rvMonHoc.setAdapter(adapter);
     }
 
-    private void observeViewModel() {//lắng nghe sự thay đổi củ viewmodel để cập nhật danh sách và thông báo
+    private void observeViewModel() {
         viewModel.getAllMonHocs().observe(this, monHocs -> {
             adapter.setList(monHocs);
         });

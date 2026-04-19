@@ -17,8 +17,6 @@ public class DoiTuongAdapter extends RecyclerView.Adapter<DoiTuongAdapter.ViewHo
 
     private List<DoiTuongUuTien> list;
     private OnItemClickListener listener;
-
-    // Interface để xử lý sự kiện khi click vào một dòng trong danh sách
     public interface OnItemClickListener {
         void onItemClick(DoiTuongUuTien doiTuong);
     }
@@ -27,8 +25,6 @@ public class DoiTuongAdapter extends RecyclerView.Adapter<DoiTuongAdapter.ViewHo
         this.list = list;
         this.listener = listener;
     }
-
-    // Cập nhật danh sách và làm mới RecyclerView
     public void setList(List<DoiTuongUuTien> list) {
         this.list = list;
         notifyDataSetChanged();
@@ -37,7 +33,6 @@ public class DoiTuongAdapter extends RecyclerView.Adapter<DoiTuongAdapter.ViewHo
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Sử dụng file item_doi_tuong_uu_tien.xml bạn đã sửa
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.dai_item_doituong, parent, false);
         return new ViewHolder(view);
@@ -49,8 +44,6 @@ public class DoiTuongAdapter extends RecyclerView.Adapter<DoiTuongAdapter.ViewHo
 
         holder.tvMaDT.setText(doiTuong.getMaDT());
         holder.tvTenDT.setText(doiTuong.getTenDT());
-
-        // Hiển thị tỉ lệ giảm (Ví dụ: 0.5)
         if (doiTuong.getTiLeGiamHocPhi() != null) {
             holder.tvTiLe.setText(String.valueOf(doiTuong.getTiLeGiamHocPhi()));
         } else {

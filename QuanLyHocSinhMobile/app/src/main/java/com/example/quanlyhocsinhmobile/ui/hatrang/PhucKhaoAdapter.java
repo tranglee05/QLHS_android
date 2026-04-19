@@ -17,8 +17,6 @@ public class PhucKhaoAdapter extends RecyclerView.Adapter<PhucKhaoAdapter.ViewHo
 
     private List<PhucKhao.Display> list;
     private OnClick listener;
-
-    // Interface để xử lý sự kiện click khi chọn một đơn phúc khảo
     public interface OnClick {
         void click(PhucKhao.Display d);
     }
@@ -48,16 +46,12 @@ public class PhucKhaoAdapter extends RecyclerView.Adapter<PhucKhaoAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder h, int i) {
         PhucKhao.Display d = list.get(i);
         PhucKhao pk = d.getPhucKhao();
-
-        // Đổ dữ liệu từ Model vào các TextView
         h.mahs.setText(pk.getMaHS());
         h.hoten.setText(d.getTenHS());
         h.tenmon.setText(d.getTenMH());
         h.lydo.setText(pk.getLyDo());
         h.ngaygui.setText(pk.getNgayGui());
         h.trangthai.setText(pk.getTrangThai());
-
-        // Xử lý sự kiện click vào item
         h.itemView.setOnClickListener(v -> {
             if (listener != null) {
                 listener.click(d);

@@ -26,11 +26,9 @@ public class TaiKhoanAdapter extends RecyclerView.Adapter<TaiKhoanAdapter.ViewHo
         this.list = list;
         this.listener = listener;
     }
-
-    // Cập nhật dữ liệu
     public void setList(List<TaiKhoan> list) {
         this.list = list;
-        notifyDataSetChanged(); // đơn giản, nếu muốn tối ưu có thể dùng DiffUtil
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -43,38 +41,24 @@ public class TaiKhoanAdapter extends RecyclerView.Adapter<TaiKhoanAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
-        // ⚠️ chống crash nếu list null
         if (list == null || position >= list.size()) return;
 
         TaiKhoan taiKhoan = list.get(position);
-
-        // Username
         holder.tvUsername.setText(
                 taiKhoan.getTenDangNhap() != null ? taiKhoan.getTenDangNhap() : "--"
         );
-
-        // Password (có thể ẩn)
         if (taiKhoan.getMatKhau() != null && !taiKhoan.getMatKhau().isEmpty()) {
             holder.tvPassword.setText(taiKhoan.getMatKhau());
-            // 👉 nếu muốn ẩn thì dùng:
-            // holder.tvPassword.setText("******");
         } else {
             holder.tvPassword.setText("--");
         }
-
-        // Quyền
         holder.tvQuyen.setText(
                 taiKhoan.getQuyen() != null ? taiKhoan.getQuyen() : "--"
         );
-
-        // Mã người dùng
         String maND = taiKhoan.getMaNguoiDung();
         holder.tvMaND.setText(
                 (maND != null && !maND.isEmpty()) ? maND : "--"
         );
-
-        // Click item
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) {
                 listener.onItemClick(taiKhoan);
@@ -95,7 +79,7 @@ public class TaiKhoanAdapter extends RecyclerView.Adapter<TaiKhoanAdapter.ViewHo
             super(itemView);
 
             tvUsername = itemView.findViewById(R.id.tv_item_username);
-            tvPassword = itemView.findViewById(R.id.tv_item_password); // 🔥 phải có trong XML
+            tvPassword = itemView.findViewById(R.id.tv_item_password);
             tvQuyen = itemView.findViewById(R.id.tv_item_quyen);
             tvMaND = itemView.findViewById(R.id.tv_item_ma_nd);
         }

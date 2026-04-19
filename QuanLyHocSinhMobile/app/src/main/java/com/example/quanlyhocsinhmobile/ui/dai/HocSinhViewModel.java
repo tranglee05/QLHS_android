@@ -34,13 +34,9 @@ public class HocSinhViewModel extends AndroidViewModel {
     public LiveData<String> getMsg() {
         return msg;
     }
-
-    // Load tất cả
     public void loadAll() {
         ex.execute(() -> list.postValue(repo.getAll()));
     }
-
-    // Tìm kiếm
     public void search(String q) {
         if (q == null || q.trim().isEmpty()) {
             loadAll();
@@ -48,8 +44,6 @@ public class HocSinhViewModel extends AndroidViewModel {
             ex.execute(() -> list.postValue(repo.search(q)));
         }
     }
-
-    // Thêm
     public void insert(HocSinh hs) {
         if (hs == null ||
                 hs.getMaHS().trim().isEmpty() ||
@@ -60,13 +54,10 @@ public class HocSinhViewModel extends AndroidViewModel {
         }
 
         ex.execute(() -> {
-            // check trùng mã
             if (repo.checkMa(hs.getMaHS()) > 0) {
                 msg.postValue("Mã học sinh đã tồn tại!");
                 return;
             }
-
-            // check trùng tên (optional)
             if (repo.checkTen(hs.getHoTen()) > 0) {
                 msg.postValue("Tên học sinh đã tồn tại!");
                 return;
@@ -77,8 +68,6 @@ public class HocSinhViewModel extends AndroidViewModel {
             loadAll();
         });
     }
-
-    // Cập nhật
     public void update(HocSinh hs) {
         if (hs == null) {
             msg.setValue("Vui lòng chọn học sinh để sửa");
@@ -91,19 +80,12 @@ public class HocSinhViewModel extends AndroidViewModel {
         }
 
         ex.execute(() -> {
-//            // check trùng tên (trừ chính nó)
-//            if (repo.checkTen(hs.getHoTen()) > 0) {
-//                msg.postValue("Tên học sinh đã tồn tại!");
-//                return;
-//            }
-
             repo.update(hs);
             msg.postValue("Cập nhật thành công");
             loadAll();
         });
     }
 
-    // Xóa
     public void delete(HocSinh hs) {
         if (hs == null) {
             msg.setValue("Vui lòng chọn học sinh để xóa");

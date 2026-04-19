@@ -29,7 +29,6 @@ public class GiaoVienActivity extends AppCompatActivity {
     private GiaoVien.Display selectedGiaoVien;
     private PhanQuyen phanQuyen;
 
-    // ✅ Adapter cho Spinner
     private ArrayAdapter<ToHopMon> toHopAdapter;
     private ArrayAdapter<MonHoc> monHocAdapter;
 
@@ -46,29 +45,21 @@ public class GiaoVienActivity extends AppCompatActivity {
         observeViewModel();
         setupClickListeners();
         apDungPhanQuyen();
-
-        // ✅ Load dữ liệu cho Spinner
         viewModel.loadSpinnerData();
     }
 
     private void apDungPhanQuyen() {
         if ("GiaoVien".equals(phanQuyen.getQuyen())) {
-            // Sử dụng các ID đúng đã có trong file XML
             if (binding.tvTitleGiaovien != null) {
                 binding.tvTitleGiaovien.setText("HỒ SƠ GIÁO VIÊN");
             }
             binding.tvGiaoVienInfo.setText("HỒ SƠ GIÁO VIÊN");
-            
-            // Ẩn nút thêm, xóa
             binding.btnAdd.setVisibility(View.GONE);
             binding.btnDelete.setVisibility(View.GONE);
-            
-            // ✅ Khóa các trường (bao gồm Spinner)
             binding.etMaGiaoVien.setEnabled(false);
             binding.spMaToHop.setEnabled(false);
             binding.spTenMon.setEnabled(false);
 
-            // Chỉ load hồ sơ của chính giáo viên đó
             String maGV = phanQuyen.getMaNguoiDung();
             if (maGV != null && !maGV.isEmpty()) {
                 viewModel.search(maGV);
@@ -76,7 +67,6 @@ public class GiaoVienActivity extends AppCompatActivity {
             if (binding.tvFilterTitle != null) binding.tvFilterTitle.setVisibility(View.GONE);
             if (binding.cardSearch != null) binding.cardSearch.setVisibility(View.GONE);
         } else {
-            // ✅ Khóa mã GV (tự động generate)
             binding.etMaGiaoVien.setEnabled(false);
         }
     }
@@ -94,8 +84,6 @@ public class GiaoVienActivity extends AppCompatActivity {
         viewModel.getAllGiaoViens().observe(this, list -> {
             adapter.setList(list);
         });
-
-        // Observe toastMessage từ ViewModel
         viewModel.getToastMessage().observe(this, message -> {
             if (message != null && !message.isEmpty()) {
                 Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
@@ -104,8 +92,6 @@ public class GiaoVienActivity extends AppCompatActivity {
                 }
             }
         });
-
-        // ✅ Observer dữ liệu Spinner
         viewModel.getToHopMonList().observe(this, toHops -> {
             if (toHops != null) {
                 toHopAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, toHops);
@@ -134,7 +120,6 @@ public class GiaoVienActivity extends AppCompatActivity {
             GiaoVien gv = getFormData();
             if (gv != null) {
                 viewModel.insert(gv);
-                // Toast sẽ được hiển thị từ ViewModel observer
             }
         });
 
@@ -145,7 +130,6 @@ public class GiaoVienActivity extends AppCompatActivity {
             if (gv != null) {
                 gv.setMaGV(selectedGiaoVien.getGiaoVien().getMaGV());
                 viewModel.update(gv);
-                // Toast sẽ được hiển thị từ ViewModel observer
             }
         });
 
@@ -167,12 +151,11 @@ public class GiaoVienActivity extends AppCompatActivity {
     }
 
     private GiaoVien getFormData() {
-        String ma = ""; // ✅ Sẽ được auto-generate trong ViewModel
+        String ma = "";
         String ten = binding.etTenGv.getText().toString().trim();
         String ngaySinhInput = binding.etNgaySinh.getText().toString().trim();
         String sdt = binding.etSdt.getText().toString().trim();
 
-        // ✅ Lấy giá trị từ Spinner
         ToHopMon selectedToHop = (ToHopMon) binding.spMaToHop.getSelectedItem();
         MonHoc selectedMonHoc = (MonHoc) binding.spTenMon.getSelectedItem();
 
@@ -197,7 +180,7 @@ public class GiaoVienActivity extends AppCompatActivity {
         }
 
         GiaoVien gv = new GiaoVien();
-        gv.setMaGV(ma);  // Để trống - sẽ auto-generate
+        gv.setMaGV(ma);
         gv.setHoTen(ten);
         gv.setNgaySinh(ngaySinh);
         gv.setSdt(sdt);
@@ -215,7 +198,6 @@ public class GiaoVienActivity extends AppCompatActivity {
         binding.etNgaySinh.setText(FormatDate.formatDateForDisplay(gv.getNgaySinh()));
         binding.etSdt.setText(gv.getSdt());
 
-        // ✅ Set Spinner
         if (toHopAdapter != null) {
             for (int i = 0; i < toHopAdapter.getCount(); i++) {
                 if (toHopAdapter.getItem(i).getMaToHop().equals(gv.getMaToHop())) {
@@ -241,8 +223,6 @@ public class GiaoVienActivity extends AppCompatActivity {
         binding.etTenGv.setText("");
         binding.etNgaySinh.setText("");
         binding.etSdt.setText("");
-
-        // ✅ Reset Spinner
         if (binding.spMaToHop.getCount() > 0) binding.spMaToHop.setSelection(0);
         if (binding.spTenMon.getCount() > 0) binding.spTenMon.setSelection(0);
     }

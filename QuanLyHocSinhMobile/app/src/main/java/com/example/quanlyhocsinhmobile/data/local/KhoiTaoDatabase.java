@@ -43,9 +43,6 @@ public class KhoiTaoDatabase {
     private static void seedData(SupportSQLiteDatabase db) {
         db.beginTransaction();
         try {
-// ==========================================
-// 1. DANH MỤC CƠ BẢN
-// ==========================================
             db.execSQL("INSERT INTO DoiTuongUuTien (MaDT, TenDT, TiLeGiamHocPhi) VALUES " +
                     "('DT00', 'Thường', 0.0), ('DT01', 'Hộ nghèo', 0.5), ('DT02', 'Con thương binh', 1.0);");
 
@@ -64,9 +61,6 @@ public class KhoiTaoDatabase {
                     "('LAB1', 'Máy tính 1', 50, 'Thực hành', 'Trống'), " +
                     "('LAB2', 'Thí nghiệm Hóa Sinh', 40, 'Thực hành', 'Trống');");
 
-// ==========================================
-// 2. NHÂN SỰ (12 GIÁO VIÊN & 12 LỚP)
-// ==========================================
             db.execSQL("INSERT INTO GiaoVien (MaGV, HoTen, NgaySinh, SDT, MaToHop, MaMH) VALUES " +
                     "('GV01', 'Nguyễn Bá Đạt', '1985-05-20', '0901234567', 'KHTN', 'MH01'), " + // Toán
                     "('GV02', 'Trần Thu Trang', '1990-11-15', '0912345678', 'KHXH', 'MH02'), " + // Văn
@@ -89,11 +83,6 @@ public class KhoiTaoDatabase {
                     "('11A2', '11A2', '2022-2025', 'GV09'), ('12A1', '12A1', '2021-2024', 'GV10'), " +
                     "('12A2', '12A2', '2021-2024', 'GV11'), ('12A3', '12A3', '2021-2024', 'GV12');");
 
-// ============================================================
-// 3. THÊM HỌC SINH VÀO CÁC LỚP (Dùng SQL logic)
-// ============================================================
-
-// --- KHỐI 10 (Niên khóa 2023-2026) ---
             db.execSQL("INSERT INTO HocSinh (MaHS, HoTen, NgaySinh, GioiTinh, DiaChi, MaLop, MaDT) VALUES " +
                     "('HS001', 'Nguyễn Thị Mai', '2008-10-01', 'Nữ', 'Hà Nội', '10A1', 'DT00')," +
                     "('HS002', 'Trần Thị Lan', '2008-02-20', 'Nữ', 'Bắc Ninh', '10A1', 'DT01')," +
@@ -113,7 +102,6 @@ public class KhoiTaoDatabase {
                     "('HS016', 'Vũ Văn Phong', '2008-04-06', 'Nam', 'Thái Bình', '10A2', 'DT00')," +
                     "('HS017', 'Võ Thị Ngọc', '2008-11-26', 'Nữ', 'Hưng Yên', '10A3', 'DT00');");
 
-// --- KHỐI 11 (Niên khóa 2022-2025) ---
             db.execSQL("INSERT INTO HocSinh (MaHS, HoTen, NgaySinh, GioiTinh, DiaChi, MaLop, MaDT) VALUES " +
                     "('HS018', 'Đặng Văn Sơn', '2007-10-06', 'Nam', 'Hải Dương', '11A1', 'DT02')," +
                     "('HS019', 'Bùi Văn Thắng', '2007-12-03', 'Nam', 'Vĩnh Phúc', '11A1', 'DT00')," +
@@ -129,8 +117,6 @@ public class KhoiTaoDatabase {
                     "('HS029', 'Bùi Thị Thảo', '2007-06-15', 'Nữ', 'Vĩnh Phúc', '11A2', 'DT00')," +
                     "('HS030', 'Đỗ Văn Tiến', '2007-03-21', 'Nam', 'Hà Nam', '11A1', 'DT00')," +
                     "('HS031', 'Nguyễn Văn Quân', '2007-03-24', 'Nam', 'Hà Nội', '11A2', 'DT00');");
-
-// --- KHỐI 12 (Niên khóa 2021-2024) ---
             db.execSQL("INSERT INTO HocSinh (MaHS, HoTen, NgaySinh, GioiTinh, DiaChi, MaLop, MaDT) VALUES " +
                     "('HS032', 'Trần Văn Bình', '2006-02-11', 'Nam', 'Bắc Ninh', '12A1', 'DT00')," +
                     "('HS033', 'Lê Văn Tâm', '2006-07-11', 'Nam', 'Thái Nguyên', '12A1', 'DT00')," +
@@ -153,11 +139,6 @@ public class KhoiTaoDatabase {
                     "('HS050', 'Đỗ Thị Trang', '2006-06-25', 'Nữ', 'Hà Nam', '12A1', 'DT00');");
 
 
-// ==========================================
-// 4. ĐIỂM, HẠNH KIỂM, HỌC PHÍ (Dùng SQL logic)
-// ==========================================
-
-// Tạo điểm ngẫu nhiên cho tất cả HS và 10 môn học
             db.execSQL("INSERT INTO Diem (MaHS, MaMH, HocKy, Diem15p, Diem1Tiet, DiemGiuaKy, DiemCuoiKy) " +
                     "SELECT h.MaHS, m.MaMH, 1, " +
                     "ROUND((ABS(RANDOM()) % 101) / 10.0, 1), ROUND((ABS(RANDOM()) % 101) / 10.0, 1), " +
@@ -166,13 +147,11 @@ public class KhoiTaoDatabase {
 
             db.execSQL("UPDATE Diem SET DiemTongKet = ROUND((Diem15p + Diem1Tiet * 2 + DiemGiuaKy * 2 + DiemCuoiKy * 3) / 8.0, 1);");
 
-// Tạo Hạnh kiểm ngẫu nhiên
             db.execSQL("INSERT INTO HanhKiem (MaHS, HocKy, NamHoc, XepLoai, NhanXet) " +
                     "SELECT MaHS, 1, '2025-2026', " +
                     "CASE (ABS(RANDOM()) % 4) WHEN 0 THEN 'Tốt' WHEN 1 THEN 'Khá' WHEN 2 THEN 'Trung bình' ELSE 'Tốt' END, " +
                     "'Tuân thủ nội quy.' FROM HocSinh;");
 
-// Tạo Học phí
             db.execSQL("INSERT INTO HocPhi (MaHS, HocKy, NamHoc, TongTien, MienGiam, PhaiDong, TrangThai) " +
                     "SELECT hs.MaHS, 1, '2025-2026', 2000000, " +
                     "COALESCE(dt.TiLeGiamHocPhi, 0) * 2000000, " +
@@ -180,9 +159,6 @@ public class KhoiTaoDatabase {
                     "CASE (ABS(RANDOM()) % 3) WHEN 0 THEN 'Chưa đóng' WHEN 1 THEN 'Đã đóng' ELSE 'Chưa đóng' END " +
                     "FROM HocSinh hs LEFT JOIN DoiTuongUuTien dt ON hs.MaDT = dt.MaDT;");
 
-// ==========================================
-// 5. HỆ THỐNG (TÀI KHOẢN, THÔNG BÁO, LỊCH THI...)
-// ==========================================
             db.execSQL("INSERT OR IGNORE INTO TaiKhoan (TenDangNhap, MatKhau, Quyen, MaNguoiDung) VALUES " +
                     "('admin', '123456', 'Admin', 'AD01'), ('gv01', '123456', 'GiaoVien', 'GV01'), ('hs001', '123456', 'HocSinh', 'HS001');");
 

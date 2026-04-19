@@ -52,16 +52,11 @@ public class HanhKiemActivity extends AppCompatActivity {
             if (titleView instanceof android.widget.TextView) {
                 ((android.widget.TextView) titleView).setText("HẠNH KIỂM");
             }
-
-            // Ẩn phần cập nhật hạnh kiểm
             binding.tvUpdateTitleHk.setVisibility(View.GONE);
             binding.cardUpdateHk.setVisibility(View.GONE);
-            
-            // Chỉ thấy hạnh kiểm của mình
             String maHS = phanQuyen.getMaNguoiDung();
             if (maHS != null && !maHS.isEmpty()) {
                 viewModel.search(maHS);
-                // Ẩn thanh tìm kiếm và bộ lọc để học sinh chỉ thấy hạnh kiểm của mình
                 binding.cardSearchHk.setVisibility(View.GONE);
                 binding.tvSearchTitleHk.setVisibility(View.GONE);
             }

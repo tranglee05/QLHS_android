@@ -22,8 +22,6 @@ public class DoiTuongRepository {
         return doiTuongDAO.search(query);
     }
 
-    // BỎ AppDatabase.databaseWriteExecutor.execute(...)
-    // Vì ViewModel đã quản lý luồng rồi
     public void insert(DoiTuongUuTien doiTuong) {
         doiTuongDAO.insert(doiTuong);
     }

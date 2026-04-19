@@ -48,18 +48,13 @@ public class HocPhiActivity extends AppCompatActivity {
     private void apDungPhanQuyen() {
         String quyen = phanQuyen.getQuyen();
         if ("HocSinh".equals(quyen)) {
-            // Đổi tiêu đề cho học sinh
             if (binding.tvTitleHocphi != null) {
                 binding.tvTitleHocphi.setText("HỌC PHÍ");
             }
-
-            // Ẩn khu vực lọc và cập nhật khi học sinh đăng nhập
             binding.tvFilterTitle.setVisibility(View.GONE);
             binding.cardFilter.setVisibility(View.GONE);
             binding.tvUpdateHocphi.setVisibility(View.GONE);
             binding.cardUpdateHocphi.setVisibility(View.GONE);
-
-            // Hiện nút thanh toán cho học sinh
             binding.cardPaymentHocphi.setVisibility(View.VISIBLE);
 
             String maHS = phanQuyen.getMaNguoiDung();
@@ -163,7 +158,7 @@ public class HocPhiActivity extends AppCompatActivity {
         } else if (tt.equals("Đã đóng")) {
             binding.spinnerTrangthai.setSelection(2);
         } else {
-            binding.spinnerTrangthai.setSelection(0); // Trạng thái (mặc định)
+            binding.spinnerTrangthai.setSelection(0);
         }
     }
 
@@ -188,14 +183,11 @@ public class HocPhiActivity extends AppCompatActivity {
             viewModel.filter(0,"","");
 
             Toast.makeText(this, "Sửa thành công!", Toast.LENGTH_SHORT).show();
-
-            //Reset lại form
             binding.etTongtien.setText("");
             binding.etMiengiam.setText("");
             binding.etPhaidong.setText("");
             binding.spinnerTrangthai.setSelection(0);
 
-            //bỏ chọn
             selectedHocPhi = null;
 
         } catch (Exception e) {

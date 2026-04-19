@@ -31,11 +31,9 @@ public interface GiaoVienDAO {
     @Query("SELECT COUNT(*) FROM GiaoVien  WHERE MaGV = :maGV")
     int checkMaGiaoVien(String maGV);
 
-    // int checkTenGiaoVien(String tenGV);
     @Query("SELECT  COUNT(*) FROM GiaoVien WHERE SDT = :sdt")
     int checkSDT(String sdt);
 
-    // sua
     @Query("SELECT GiaoVien.*, ToHopMon.tenToHop, MonHoc.TenMH " +
             "FROM GiaoVien " +
             "LEFT JOIN ToHopMon ON GiaoVien.maToHop = ToHopMon.maToHop " +
@@ -48,7 +46,6 @@ public interface GiaoVienDAO {
 
      List<GiaoVien.Display> searchGiaoVien(String query);
 
-     // ✅ Lấy mã GV tiếp theo (auto-generate)
      @Query("SELECT COALESCE(MAX(CAST(SUBSTR(MaGV, 3) AS INTEGER)), 0) FROM GiaoVien WHERE MaGV LIKE 'GV%'")
      int getMaxGVNumber();
 }

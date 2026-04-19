@@ -46,8 +46,6 @@ public class GiaoVienRepository {
     public void insert(GiaoVien giaoVien) {
         AppDatabase.databaseWriteExecutor.execute(() -> giaovienDAO.insert(giaoVien));
     }
-
-    // Đợi insert hoàn thành trước khi trở lại
     public void insertAndWait(GiaoVien giaoVien) {
         CountDownLatch latch = new CountDownLatch(1);
         AppDatabase.databaseWriteExecutor.execute(() -> {
@@ -67,8 +65,6 @@ public class GiaoVienRepository {
     public void update(GiaoVien giaoVien){
         AppDatabase.databaseWriteExecutor.execute(() -> giaovienDAO.update(giaoVien));
     }
-
-    // Đợi update hoàn thành trước khi trở lại
     public void updateAndWait(GiaoVien giaoVien) {
         CountDownLatch latch = new CountDownLatch(1);
         AppDatabase.databaseWriteExecutor.execute(() -> {
@@ -88,8 +84,6 @@ public class GiaoVienRepository {
     public void delete(GiaoVien giaoVien) {
         AppDatabase.databaseWriteExecutor.execute(() -> giaovienDAO.delete(giaoVien));
     }
-
-    // Đợi delete hoàn thành trước khi trở lại
     public void deleteAndWait(GiaoVien giaoVien) {
         CountDownLatch latch = new CountDownLatch(1);
         AppDatabase.databaseWriteExecutor.execute(() -> {
@@ -117,8 +111,6 @@ public class GiaoVienRepository {
     public List<GiaoVien.Display> searchGiaoVien(String query){
         return giaovienDAO.searchGiaoVien(query);
     }
-
-    // ✅ Lấy mã GV tiếp theo
     public String getNextMaGV() {
         int maxNum = giaovienDAO.getMaxGVNumber();
         return String.format("GV%02d", maxNum + 1);

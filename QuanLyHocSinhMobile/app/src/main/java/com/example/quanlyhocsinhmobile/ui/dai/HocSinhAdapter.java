@@ -44,8 +44,6 @@ public class HocSinhAdapter extends RecyclerView.Adapter<HocSinhAdapter.VH> {
     @Override
     public void onBindViewHolder(@NonNull VH h, int i) {
         HocSinh hs = list.get(i);
-
-        // bind đủ 7 cột
         h.tvMa.setText(hs.getMaHS());
         h.tvTen.setText(hs.getHoTen());
         h.tvNS.setText(FormatDate.formatDateForDisplay(hs.getNgaySinh()));

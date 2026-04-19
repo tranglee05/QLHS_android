@@ -25,19 +25,15 @@ public interface DoiTuongDAO {
     @Delete
     void delete(DoiTuongUuTien doiTuong);
 
-    // Kiểm tra trùng mã đối tượng
     @Query("SELECT COUNT(*) FROM DoiTuongUuTien WHERE maDT = :maDT")
     int checkMaDT(String maDT);
 
-    // Kiểm tra trùng tên đối tượng
     @Query("SELECT COUNT(*) FROM DoiTuongUuTien WHERE tenDT = :tenDT")
     int checkTenDT(String tenDT);
 
-    // Lấy tên đối tượng dựa vào mã
     @Query("SELECT tenDT FROM DoiTuongUuTien WHERE maDT = :maDT")
     String getTenDT(String maDT);
 
-    // Tìm kiếm theo mã hoặc tên đối tượng
     @Query("SELECT * FROM DoiTuongUuTien WHERE maDT LIKE '%' || :query || '%' OR tenDT LIKE '%' || :query || '%'")
     List<DoiTuongUuTien> search(String query);
 

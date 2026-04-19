@@ -18,8 +18,6 @@ public class GiaoVienAdapter extends RecyclerView.Adapter<GiaoVienAdapter.ViewHo
 
     private List<GiaoVien.Display> list;
     private OnItemClickListener listener;
-
-    // ✅ SỬA: dùng Display luôn (vì bạn đang JOIN)
     public interface OnItemClickListener {
         void onItemClick(GiaoVien.Display display);
     }
@@ -77,8 +75,6 @@ public class GiaoVienAdapter extends RecyclerView.Adapter<GiaoVienAdapter.ViewHo
             tvTenGV.setText(giaoVien.getHoTen());
             tvNgaySinh.setText(FormatDate.formatDateForDisplay(giaoVien.getNgaySinh()));
             TvSDT.setText(giaoVien.getSdt());
-
-            // ✅ ưu tiên tên, fallback mã
             tvMaToHop.setText(display.getTenToHop() != null
                     ? display.getTenToHop()
                     : giaoVien.getMaToHop());
@@ -86,8 +82,6 @@ public class GiaoVienAdapter extends RecyclerView.Adapter<GiaoVienAdapter.ViewHo
             tvTenMH.setText(display.getTenMH() != null
                     ? display.getTenMH()
                     : giaoVien.getMaMH());
-
-            // ✅ FIX LỖI: truyền đúng kiểu Display
             itemView.setOnClickListener(v -> {
                 if (listener != null) {
                     listener.onItemClick(display);

@@ -34,7 +34,6 @@ public class DoiTuongActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Đảm bảo tên layout này khớp với file XML bạn đã tạo
         setContentView(R.layout.dai_activity_doituong);
 
         viewModel = new ViewModelProvider(this).get(DoiTuongViewModel.class);
@@ -45,7 +44,6 @@ public class DoiTuongActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        // Ánh xạ ID từ layout_quan_ly_doi_tuong_uu_tien.xml
         etSearch = findViewById(R.id.et_search_dt);
         btnSearch = findViewById(R.id.btn_search_dt);
         rvDoiTuong = findViewById(R.id.rv_dt);
@@ -60,24 +58,19 @@ public class DoiTuongActivity extends AppCompatActivity {
         btnDelete = findViewById(R.id.btn_delete_dt);
         btnRefresh = findViewById(R.id.btn_refresh_dt);
 
-        // Sự kiện Tìm kiếm
         btnSearch.setOnClickListener(v -> viewModel.search(etSearch.getText().toString().trim()));
-
-        // Sự kiện Thêm
         btnAdd.setOnClickListener(v -> viewModel.insert(
                 etMa.getText().toString().trim(),
                 etTen.getText().toString().trim(),
                 etTiLe.getText().toString().trim()
         ));
 
-        // Sự kiện Lưu (Cập nhật)
         btnSave.setOnClickListener(v -> viewModel.update(
                 selectedDoiTuong,
                 etTen.getText().toString().trim(),
                 etTiLe.getText().toString().trim()
         ));
 
-        // Sự kiện Xóa
         btnDelete.setOnClickListener(v -> {
             if (selectedDoiTuong == null) {
                 Toast.makeText(this, "Vui lòng chọn đối tượng để xóa", Toast.LENGTH_SHORT).show();
@@ -93,8 +86,6 @@ public class DoiTuongActivity extends AppCompatActivity {
                     .setNegativeButton("HỦY", null)
                     .show();
         });
-
-        // Sự kiện Làm mới
         btnRefresh.setOnClickListener(v -> {
             viewModel.loadAllDoiTuongs();
             clearInputs();
@@ -109,7 +100,7 @@ public class DoiTuongActivity extends AppCompatActivity {
             etTen.setText(doiTuong.getTenDT());
             etTiLe.setText(String.valueOf(doiTuong.getTiLeGiamHocPhi()));
 
-            etMa.setEnabled(false); // Khóa mã khi đang chọn để sửa
+            etMa.setEnabled(false);
         });
 
         rvDoiTuong.setLayoutManager(new LinearLayoutManager(this));
@@ -117,12 +108,9 @@ public class DoiTuongActivity extends AppCompatActivity {
     }
 
     private void observeViewModel() {
-        // Theo dõi danh sách để cập nhật lên RecyclerView
         viewModel.getAllDoiTuongs().observe(this, doiTuongs -> {
             adapter.setList(doiTuongs);
         });
-
-        // Theo dõi thông báo (Toast)
         viewModel.getToastMessage().observe(this, message -> {
             if (message != null) {
                 Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
