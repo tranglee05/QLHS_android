@@ -74,7 +74,7 @@ Dự án tuân thủ nghiêm ngặt mô hình MVVM, chia tách ứng dụng thà
 Dự án được thực hiện bởi nhóm 5 thành viên, mỗi thành viên phụ trách các module độc lập theo cấu trúc MVVM để tránh xung đột mã nguồn:
 
 * **Trần Văn Tiến (Trưởng nhóm):** Quản lý cấu trúc chung, Module Điểm, Hạnh kiểm, Lịch thi, Thiết kế Database, Xuất file Excel, Tạo Menu form, System Icons.
-* **Lê Thu Trang:** Phụ trách Module Môn học, Phòng học, Thời khóa biểu, Chức năng Đăng xuất/Thoát, Phân quyền Student/Teacher.
+* **Lê Thu Trang:** Phụ trách Module Môn học, Phòng học, Thời khóa biểu, Chức năng Đăng xuất/Thoát, Login, Phân quyền Student/Teacher.
 * **Nguyễn Thị Hà Trang:** Học phí, Thông báo, Phúc khảo, Thiết kế UI/UX, Theme chủ đề màu sắc cho toàn bộ App.
 * **Doãn Trung Đạt:** Phát triển Module Quản lý học sinh/giáo viên, Giao diện đăng nhập tài khoản..
 * **Nguyễn Đắc Đại:** Học sinh, Đối tượng chính sách, Tài khoản, Xử lý Avatar cho hồ sơ, quản lý chi tiết tài khoản.
