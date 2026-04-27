@@ -90,7 +90,7 @@ Dự án được thực hiện bởi nhóm 5 thành viên, mỗi thành viên p
 
 ---
 🚀 Hướng dẫn cài đặt
-* Clone dự án: git clone [URL_Github_Cua_Nhom]
+* Clone dự án: git clone [URL_Github]
 
 * Mở dự án bằng Android Studio (phiên bản Ladybug hoặc mới hơn).
 
