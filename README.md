@@ -1,5 +1,5 @@
 # App-QuanLyHocSinh-Mobile
-Đây là bài kiểm tra kết thúc học phần môn Lập trình di động nhóm 11 lớp 74DCHT22
+Bài kiểm tra kết thúc học phần môn Lập trình di động nhóm 11 lớp 74DCHT22
 
 
 ## Cấu trúc thư mục (MVVM Architecture)
@@ -90,7 +90,7 @@ Dự án được thực hiện bởi nhóm 5 thành viên, mỗi thành viên p
 
 ---
 🚀 Hướng dẫn cài đặt
-* Clone dự án: git clone [URL_Github]
+* Clone dự án: git clone (https://github.com/tranglee05/QLHS_android.git)
 
 * Mở dự án bằng Android Studio (phiên bản Ladybug hoặc mới hơn).
 
